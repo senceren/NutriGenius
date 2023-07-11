@@ -70,6 +70,10 @@ namespace NutriGeniusForm
 
                     newUser.SignIn(newUser, db);
                     MessageBox.Show("Kayıt başarıyla oluşturulmuştur.");
+                    // bu form kapansın ve giriş formu açılsın.
+                    this.Close();
+                    Form giris = new GirisForm();
+                    giris.ShowDialog();
                 }
                 catch (Exception ex)
                 {
