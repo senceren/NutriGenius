@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33516.290
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NutriGenius.Data", "NutriGenius.Data\NutriGenius.Data.csproj", "{4A836804-197E-49BD-B99B-1EF5394634DA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NutriGeniusForm", "NutriGeniusForm\NutriGeniusForm.csproj", "{3F8DE2B3-987E-46D6-B570-69021CCA81CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A836804-197E-49BD-B99B-1EF5394634DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A836804-197E-49BD-B99B-1EF5394634DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A836804-197E-49BD-B99B-1EF5394634DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A836804-197E-49BD-B99B-1EF5394634DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F8DE2B3-987E-46D6-B570-69021CCA81CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F8DE2B3-987E-46D6-B570-69021CCA81CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F8DE2B3-987E-46D6-B570-69021CCA81CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F8DE2B3-987E-46D6-B570-69021CCA81CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D35933CA-511A-44AB-928F-CBB640D3E06A}
+	EndGlobalSection
+EndGlobal
