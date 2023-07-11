@@ -79,6 +79,7 @@
             Controls.Add(btnSignIn);
             DoubleBuffered = true;
             Name = "AcilisForm";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "AcilisForm";
             ResumeLayout(false);
             PerformLayout();
