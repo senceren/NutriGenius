@@ -1,5 +1,6 @@
 ﻿using NutriGenius.Data.Entities.Abstract_Class;
 using NutriGenius.Data.Entities.Enums;
+using NutriGenius.Data.Exceptions;
 using NutriGeniusForm;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,22 @@ namespace NutriGenius.Data.Entities.Classes
 
         public string UserName { get; set; } = null!;
 
-        public string Password { get; set; } = null!;
+        private string password = null!;
+
+        public string Password
+        {
+            get { return password; }
+            set 
+            {
+                if (value.Length < 8 || (!value.Any(x => Char.IsUpper(x)) &&
+                        !value.Any(x => Char.IsLower(x))))
+                {
+                    throw new PasswordException();
+                }
+                password = value; 
+            }
+        }
+
 
         public string FirstName { get; set; } = null!;
 
@@ -26,9 +42,37 @@ namespace NutriGenius.Data.Entities.Classes
         public DateTime BirthDate { get; set; }
 
         public Gender Gender { get; set; }
-        public int Height { get; set; }
+        private int height;
 
-        public double Weight { get; set; }
+        public int Height
+        {
+            get { return height; }
+            set 
+            { 
+                if(value <= 70 || value >= 250)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                height = value; 
+            }
+        }
+
+
+        private double weight;
+
+        public double Weight
+        {
+            get { return weight; }
+            set
+            {
+                if (value <= 30 || value >= 300)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
+                weight = value;
+            }
+        }
+
 
         public List<Meal> Meals { get; set; } = new();
 

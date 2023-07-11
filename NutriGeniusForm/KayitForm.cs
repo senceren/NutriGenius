@@ -1,4 +1,5 @@
 ﻿using NutriGenius.Data.Entities.Classes;
+using NutriGenius.Data.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -53,24 +54,6 @@ namespace NutriGeniusForm
                         return;
                     }
 
-                    if (txtPassword.Text.Length < 8 || (!txtPassword.Text.Any(x => Char.IsUpper(x)) && 
-                        !txtPassword.Text.Any(x => Char.IsLower(x))))
-                    {
-                        MessageBox.Show("Şifre uzunluğu en az 8 karakter olmalı ve en az 1 adet büyük ve 1 küçük harf içermelidir.");
-                        return;
-                    }
-
-                    if(Convert.ToInt32(txtHeight.Text) <= 70 || Convert.ToInt32(txtHeight.Text) >= 250)
-                    {
-                        MessageBox.Show("Boy değeri 70 ile 250 arasında olmalıdır!");
-                        return;
-                    }
-
-                    if (Convert.ToInt32(txtHeight.Text) <= 30 || Convert.ToInt32(txtHeight.Text) >= 300)
-                    {
-                        MessageBox.Show("Kilo değeri 30 ile 300 arasında olmalıdır!");
-                        return;
-                    }
 
                     User newUser = new User()
                     {
@@ -91,8 +74,20 @@ namespace NutriGeniusForm
                 catch (Exception ex)
                 {
                     if (ex.GetType() == typeof(FormatException))
+                    {
                         MessageBox.Show("Boy/kilo girişi sayısal değer olmalıdır!");
-                    
+                    }
+
+                    if (ex.GetType() == typeof(ArgumentOutOfRangeException))
+                    {
+                        MessageBox.Show("Boy veya Kilo hatalıdır!");
+                    }
+
+                    if (ex.GetType() == typeof(PasswordException))
+                    {
+                        MessageBox.Show("Şifre uzunluğu en az 8 karakter olmalı ve en az 1 adet büyük ve 1 küçük harf içermelidir.");
+                    }
+
                 }
 
             }
