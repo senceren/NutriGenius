@@ -45,6 +45,7 @@
             btnLogIn.TabIndex = 0;
             btnLogIn.Text = "Giriş Yap";
             btnLogIn.UseVisualStyleBackColor = true;
+            btnLogIn.Click += btnLogIn_Click;
             // 
             // label1
             // 
@@ -89,7 +90,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             label3.ForeColor = Color.Transparent;
-            label3.Location = new Point(247, 407);
+            label3.Location = new Point(249, 395);
             label3.Name = "label3";
             label3.Size = new Size(356, 126);
             label3.TabIndex = 5;

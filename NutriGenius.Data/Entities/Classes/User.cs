@@ -12,6 +12,7 @@ namespace NutriGenius.Data.Entities.Classes
 {
     public class User
     {
+
         public int Id { get; set; }
 
         public string UserName { get; set; } = null!;
@@ -22,19 +23,14 @@ namespace NutriGenius.Data.Entities.Classes
 
         public string LastName { get; set; } = null!;
 
-        public string Email { get; set; } = null!;
-
         public DateTime BirthDate { get; set; }
 
         public Gender Gender { get; set; }
-
-        public double Height { get; set; }
+        public int Height { get; set; }
 
         public double Weight { get; set; }
 
-
         public List<Meal> Meals { get; set; } = new();
-
 
         private string Sha256(string password)
         {
@@ -47,9 +43,20 @@ namespace NutriGenius.Data.Entities.Classes
 
         public void SignIn(User newUser, NutriGeniusDbContext db)
         {
-           newUser.Password =  Sha256(newUser.Password);
+            newUser.Password = Sha256(newUser.Password);
             db.Users.Add(newUser);
             db.SaveChanges();
+        }
+
+        public bool LogIn(User user, NutriGeniusDbContext db, string userName, string password)
+        {
+            if(db.Users.Any(x => x.Password == Sha256(password)) && db.Users.Any(x => x.UserName == userName))
+            {
+                return true;
+            }
+
+            return false;
+            
         }
     }
 }
