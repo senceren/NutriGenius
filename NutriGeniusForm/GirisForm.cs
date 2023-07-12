@@ -1,4 +1,5 @@
 ﻿
+using NutriGenius.Data.Entities;
 using NutriGenius.Data.Entities.Classes;
 using System;
 using System.Collections.Generic;
@@ -14,29 +15,36 @@ namespace NutriGeniusForm
 {
     public partial class GirisForm : Form
     {
+        NutriGeniusDbContext db = new NutriGeniusDbContext();
         public GirisForm()
         {
             InitializeComponent();
         }
 
+
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            using(var db = new NutriGeniusDbContext())
+
+            if (txtPassword.Text == "" || txtUserName.Text == "")
             {
-                User logInUser = new User();
-
-                if(logInUser.LogIn(logInUser, db, txtUserName.Text, txtPassword.Text))
-              
-                {
-                    Form form = new AnasayfaForm();
-                    form.ShowDialog();
-                }
-                else
-                {
-                    MessageBox.Show("Şifre veya kullanıcı hatalıdır!");
-                }
-
+                MessageBox.Show("Alanların doldurulması zorunludur.");
             }
+
+            User? logInUser = new User();
+
+            if (logInUser.LogIn(db, txtUserName.Text, txtPassword.Text))
+
+            {
+                logInUser = db.Users.FirstOrDefault(x => x.UserName == txtUserName.Text);
+                SessionManager.CurrentUser = logInUser!;
+                new AnasayfaForm().ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Şifre veya kullanıcı hatalıdır!");
+            }
+
+
         }
     }
 }

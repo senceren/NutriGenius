@@ -18,19 +18,23 @@ namespace NutriGenius.Data.Entities.Classes
 
         public string UserName { get; set; } = null!;
 
+
         private string password = null!;
 
         public string Password
         {
             get { return password; }
-            set 
+            set
             {
-                if (value.Length < 8 || (!value.Any(x => Char.IsUpper(x)) &&
-                        !value.Any(x => Char.IsLower(x))))
+                if (value.Length < 60)
                 {
-                    throw new PasswordException();
+                    if (value.Length < 8 || !(value.Any(x => Char.IsUpper(x)) &&
+                            value.Any(x => Char.IsLower(x))))
+                    {
+                        throw new PasswordException();
+                    }
                 }
-                password = value; 
+                    password = value;
             }
         }
 
@@ -39,26 +43,40 @@ namespace NutriGenius.Data.Entities.Classes
 
         public string LastName { get; set; } = null!;
 
-        public DateTime BirthDate { get; set; }
+        public DateTime BirthDate
+        {
+            get => birthDate;
+            set
+            {
+                if ((DateTime.Now.Year - value.Year) < 15)
+                {
+                    throw new AgeException();
+                }
+
+                birthDate = value;
+            }
+        }
 
         public Gender Gender { get; set; }
+
         private int height;
 
         public int Height
         {
             get { return height; }
-            set 
-            { 
-                if(value <= 70 || value >= 250)
+            set
+            {
+                if (value <= 70 || value >= 250)
                 {
                     throw new ArgumentOutOfRangeException();
                 }
-                height = value; 
+                height = value;
             }
         }
 
 
         private double weight;
+        private DateTime birthDate;
 
         public double Weight
         {
@@ -92,15 +110,15 @@ namespace NutriGenius.Data.Entities.Classes
             db.SaveChanges();
         }
 
-        public bool LogIn(User user, NutriGeniusDbContext db, string userName, string password)
+        public bool LogIn(NutriGeniusDbContext db, string userName, string password)
         {
-            if(db.Users.Any(x => x.Password == Sha256(password)) && db.Users.Any(x => x.UserName == userName))
+            if (db.Users.Any(x => x.Password == Sha256(password) && x.UserName == userName))
             {
                 return true;
             }
 
             return false;
-            
+
         }
     }
 }

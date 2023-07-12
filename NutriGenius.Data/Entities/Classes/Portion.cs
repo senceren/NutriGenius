@@ -18,8 +18,6 @@ namespace NutriGenius.Data.Entities.Classes
         public double? Calorie { get; set; }
 
 
-
-
         public List<Food> Foods { get; set; } = new();
     }
 }

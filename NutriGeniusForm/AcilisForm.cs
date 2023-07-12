@@ -19,14 +19,17 @@ namespace NutriGeniusForm
 
         private void btnSignIn_Click(object sender, EventArgs e)
         {
-            Form signInForm = new KayitForm();
-            signInForm.ShowDialog();
+            new KayitForm().ShowDialog();
         }
 
         private void btnLogIn_Click(object sender, EventArgs e)
         {
-            Form logInForm = new GirisForm();
-            logInForm.ShowDialog();
+            new GirisForm().ShowDialog();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            new AnasayfaForm().ShowDialog();    
         }
     }
 }
