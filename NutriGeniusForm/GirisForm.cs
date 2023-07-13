@@ -19,6 +19,8 @@ namespace NutriGeniusForm
         public GirisForm()
         {
             InitializeComponent();
+            txtUserName.Text = "yaziciefkan@yandex.com";
+            txtPassword.Text = "1233456Aa";
         }
 
 

@@ -21,25 +21,21 @@ namespace NutriGeniusForm
         User user = SessionManager.CurrentUser;
         User dbUser;
         Meal? meal;
+
         public AnasayfaForm()
         {
             InitializeComponent();
             lblName.Text = user.FirstName;
             
+
         }
 
 
         private void btnBreakfast_Click(object sender, EventArgs e)
         {
-            meal = new Breakfast() { MealDate = DateTime.Now };
-            dbUser = db.Users.Include(x => x.Meals).FirstOrDefault(x => x.UserName == user.UserName)!;
+            meal = new Breakfast() { MealDate = DateTime.Now.Date };
 
-            if (dbUser.Meals.Any(x => x.MealName != meal.MealName && x.MealDate != meal.MealDate) ||
-                dbUser.Meals.Count == 0)
-            {
-                dbUser.Meals.Add(meal);
-                db.SaveChanges();
-            }
+            CheckMeal();
 
             SessionManager.CurrentMeal = meal;
             new YemekEkleForm().ShowDialog();
@@ -49,15 +45,9 @@ namespace NutriGeniusForm
 
         private void btnLunch_Click(object sender, EventArgs e)
         {
-            meal = new Lunch() { MealDate = DateTime.Now };
-            dbUser = db.Users.Include(x => x.Meals).FirstOrDefault(x => x.UserName == user.UserName)!;
+            meal = new Lunch() { MealDate = DateTime.Now.Date  };
 
-            if (dbUser.Meals.Any(x => x.MealName != meal.MealName && x.MealDate.Date != meal.MealDate.Date) ||
-                dbUser.Meals.Count == 0)
-            {
-                dbUser.Meals.Add(meal);
-                db.SaveChanges();
-            }
+            CheckMeal();
 
             SessionManager.CurrentMeal = meal;
             new YemekEkleForm().ShowDialog();
@@ -65,15 +55,9 @@ namespace NutriGeniusForm
 
         private void btnDinner_Click(object sender, EventArgs e)
         {
-            meal = new Dinner() { MealDate = DateTime.Now };
-            dbUser = db.Users.Include(x => x.Meals).FirstOrDefault(x => x.UserName == user.UserName)!;
+            meal = new Dinner() { MealDate = DateTime.Now.Date };
 
-            if (dbUser.Meals.Any(x => x.MealName != meal.MealName && x.MealDate != meal.MealDate) ||
-                dbUser.Meals.Count == 0)
-            {
-                dbUser.Meals.Add(meal);
-                db.SaveChanges();
-            }
+            CheckMeal();
 
             SessionManager.CurrentMeal = meal;
             new YemekEkleForm().ShowDialog();
@@ -81,18 +65,30 @@ namespace NutriGeniusForm
 
         private void btnSnack_Click(object sender, EventArgs e)
         {
-            meal = new Snack() { MealDate = DateTime.Now };
-            dbUser = db.Users.Include(x => x.Meals).FirstOrDefault(x => x.UserName == user.UserName)!;
+            meal = new Snack() { MealDate = DateTime.Now.Date };
 
-            if (dbUser.Meals.Any(x => x.MealName != meal.MealName && x.MealDate != meal.MealDate) ||
-                dbUser.Meals.Count == 0)
-            {
-               dbUser.Meals.Add(meal);
-                db.SaveChanges();
-            }
+            CheckMeal();
 
             SessionManager.CurrentMeal = meal;
             new YemekEkleForm().ShowDialog();
+        }
+
+        private void CheckMeal()
+        {
+            bool shouldAddMeal = true;
+            dbUser = db.Users.Include(x => x.Meals).FirstOrDefault(x => x.UserName == user.UserName)!;
+
+            if (dbUser.Meals.Any(m => m.MealName.Equals(meal!.MealName))
+                && dbUser.Meals.Any(m => m.MealDate.Date == meal!.MealDate.Date))
+            {
+                shouldAddMeal = false;
+            }
+
+            if (shouldAddMeal)
+            {
+                dbUser.Meals.Add(meal);
+                db.SaveChanges();
+            }
         }
     }
 }

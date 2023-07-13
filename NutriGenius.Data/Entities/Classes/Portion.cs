@@ -15,9 +15,14 @@ namespace NutriGenius.Data.Entities.Classes
 
         public Unit Unit { get; set; }
 
-        public double? Calorie { get; set; }
+        public double Calorie { get; set; }
 
+        public bool IsIncluded { get; set; } = false;
 
         public List<Food> Foods { get; set; } = new();
+        public override string ToString()
+        {
+            return Unit.ToString();
+        }
     }
 }

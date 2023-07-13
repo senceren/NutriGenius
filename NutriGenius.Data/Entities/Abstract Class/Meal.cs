@@ -15,7 +15,7 @@ namespace NutriGenius.Data.Entities.Abstract_Class
 
         public DateTime MealDate { get; set; }
 
-        public double? Calorie { get; set; }
+        public double Calorie { get; set; } 
 
 
 

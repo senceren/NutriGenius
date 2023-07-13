@@ -13,5 +13,6 @@ namespace NutriGenius.Data.Entities.Enums
         Piece,
         Glass,
         TableSpoon
+            
     }
 }
