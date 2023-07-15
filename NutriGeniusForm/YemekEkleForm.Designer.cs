@@ -275,6 +275,7 @@
             Name = "YemekEkleForm";
             StartPosition = FormStartPosition.CenterParent;
             Text = "YemekEkleForm";
+            FormClosing += YemekEkleForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)nudPiece).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvFoods).EndInit();

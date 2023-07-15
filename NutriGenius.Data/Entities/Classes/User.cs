@@ -34,7 +34,7 @@ namespace NutriGenius.Data.Entities.Classes
                         throw new PasswordException();
                     }
                 }
-                    password = value;
+                password = value;
             }
         }
 
@@ -91,8 +91,8 @@ namespace NutriGenius.Data.Entities.Classes
             }
         }
 
+        public List<UserFoodPortionMeal> UserFoodPortionMeals { get; set; } = new();
 
-        public List<Meal> Meals { get; set; } = new();
 
         private string Sha256(string password)
         {

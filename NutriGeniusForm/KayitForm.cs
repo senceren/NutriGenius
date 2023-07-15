@@ -16,6 +16,7 @@ namespace NutriGeniusForm
     public partial class KayitForm : Form
     {
         NutriGeniusDbContext db = new NutriGeniusDbContext();
+        
         public KayitForm()
         {
             InitializeComponent();

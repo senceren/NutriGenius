@@ -20,29 +20,31 @@ namespace NutriGeniusForm
         NutriGeniusDbContext db = new NutriGeniusDbContext();
         User user = SessionManager.CurrentUser;
         Meal meal = SessionManager.CurrentMeal;
-        List<Food> selectedFoods = new List<Food>();
+        List<UserFoodPortionMeal> selectedUfs = new List<UserFoodPortionMeal>();
 
-        FoodCategory foodCategory;
         Food food;
         Portion portion;
         double piece;
 
         public YemekEkleForm()
         {
-            InitializeComponent();
             Connect();
+            InitializeComponent();
             ListFoodCategories();
-            selectedFoods.AddRange(db.Users.Include(u => u.Meals).ThenInclude(m => m.Foods).ThenInclude(m => m.Portions).FirstOrDefault(u => u.Id == user.Id).Meals.FirstOrDefault(m => m.MealName == meal.MealName).Foods);
-            UpdateFoods();
-
             lblMealName.Text = meal.MealName;
-
+            UpdateFoods();
         }
 
         private void Connect()
         {
-            db.Entry(user).State = EntityState.Unchanged;
-            db.Entry(user).Collection(x => x.Meals).Load();
+            if (db.Entry(meal).State == EntityState.Detached) // burda takip et
+            {
+                db.Attach(meal);
+            }
+
+            selectedUfs.AddRange(db.UserFoodPortionMeals.Include(uf => uf.User).Include(uf => uf.Meal).Include(uf => uf.Food).Include(uf => uf.Portion)
+               .Where(uf => uf.UserId == user.Id && uf.MealId == meal.Id && uf.Meal!.MealDate == meal.MealDate));
+
         }
 
         private void ListPortions()
@@ -70,55 +72,6 @@ namespace NutriGeniusForm
 
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            Connect();
-
-            DialogResult sonuc = MessageBox.Show($"Yemekleri {meal.MealName} öğünüze eklemek istediğinize emin misiniz?", "Ekleme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
-
-
-
-            if (sonuc == DialogResult.Yes)
-            {
-                // öğüne daha önce yemek eklendiyse caloriyi üstüne ekle
-
-                var x = user.Meals.First(x => x.MealName == meal.MealName);
-
-                x.Foods.AddRange(selectedFoods);
-
-
-
-                foreach (var item in x.Foods)
-                {
-                    foreach (var portion in item.Portions)
-                    {
-                        if (!portion.IsIncluded)
-                        {
-                            x.Calorie += portion.Calorie;
-                            portion.IsIncluded = true;
-                        }
-
-                    }
-                }
-
-                //x.Calorie += x.Foods.Sum(x => x.Portions.FirstOrDefault().Calorie);
-
-                db.SaveChanges();
-                MessageBox.Show("Yemekler başarıyla eklenmiştir.");
-            }
-
-
-        }
-
-        private void cbFoodCategory_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cbFoodCategory.SelectedIndex == -1)
-                return;
-
-            ListFoods();
-
-        }
-
 
         private void btnAddFood_Click(object sender, EventArgs e)
         {
@@ -133,32 +86,31 @@ namespace NutriGeniusForm
             ListPortions();
         }
 
+
         private void btnAdd_Click(object sender, EventArgs e)
         {
-
-            foodCategory = (FoodCategory)cbFoodCategory.SelectedItem;
             food = (Food)cbFoods.SelectedItem;
             portion = (Portion)cbPortions.SelectedItem;
             piece = (double)nudPiece.Value;
-
             portion.Amount = piece;
 
-
-            Food selectedFood = new Food()
-            {
-                FoodName = food.FoodName,
-                FoodCategoryId = foodCategory.Id,
-            };
-
-            selectedFood.Portions.Add(portion);
-
-            if (selectedFoods.Any(x => x.FoodName == selectedFood.FoodName))
+            if (selectedUfs.Any(x => x.FoodId == food.Id))
             {
                 MessageBox.Show("Eklemek istediğiniz ürün listede mevcuttur.");
                 return;
             }
 
-            selectedFoods.Add(selectedFood);
+            selectedUfs.Add(new UserFoodPortionMeal()
+            {
+                User = db.Users.FirstOrDefault(u => u.Id == user.Id),
+                UserId = db.Users.FirstOrDefault(u => u.Id == user.Id)!.Id,
+                Meal = meal,
+                MealId = meal.Id,
+                Food = food,
+                FoodId = food!.Id,
+                Portion = portion,
+                PortionId = portion.Id
+            });
 
             UpdateFoods();
 
@@ -169,15 +121,15 @@ namespace NutriGeniusForm
             if (dgvFoods.SelectedRows.Count < 0)
                 return;
 
-            string deletedFoodName = dgvFoods.SelectedRows[0].Cells[0].Value.ToString()!;
-            Food deletedFood = selectedFoods.FirstOrDefault(x => x.FoodName == deletedFoodName)!;
+
+            UserFoodPortionMeal deletedUfpm = (UserFoodPortionMeal)dgvFoods.SelectedRows[0].DataBoundItem;
 
 
             DialogResult dialogResult = MessageBox.Show("Seçili ürünü silmek istediğinize emin misiniz?", "Silme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
 
             if (dialogResult == DialogResult.Yes)
             {
-                selectedFoods.Remove(deletedFood);
+                selectedUfs.Remove(deletedUfpm);
                 UpdateFoods();
             }
 
@@ -186,12 +138,51 @@ namespace NutriGeniusForm
         private void UpdateFoods()
         {
             dgvFoods.DataSource = null;
-            dgvFoods.DataSource = selectedFoods.Select(f => new
+            dgvFoods.DataSource = selectedUfs.Select(f => new
             {
-                f.FoodName,
-                FoodCalorie = f.Portions.First().Calorie * f.Portions.FirstOrDefault().Amount
+                f.Food.FoodName,
+                FoodCalorie = (f.Portion.Calorie) * (f.Portion.Amount)
             }).ToList();
         }
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                DialogResult result = MessageBox.Show($"Yemekleri {meal.MealName} öğünüze eklemek istediğinize emin misiniz?", "Ekleme Onayı", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button1);
+
+
+                if (result == DialogResult.No) return;
+
+                meal.UserFoodPortionMeals.RemoveAll(uf => uf.UserId == user.Id);
+                meal.UserFoodPortionMeals.AddRange(selectedUfs);
+                meal.Calorie = 0;
+                meal.Calorie += meal.UserFoodPortionMeals.Sum(uf => uf.Portion!.Calorie * uf.Portion.Amount);
+
+                db.SaveChanges();
+                MessageBox.Show($"Seçili yemekler {meal.MealName} öğününe başarıyla eklenmiştir.");
+                Close();
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+        private void cbFoodCategory_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbFoodCategory.SelectedIndex == -1)
+                return;
+
+            ListFoods();
+        }
+
+        private void YemekEkleForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            new AnasayfaForm().ShowDialog();
+        }
     }
 }

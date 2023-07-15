@@ -15,12 +15,10 @@ namespace NutriGenius.Data.Entities.Abstract_Class
 
         public DateTime MealDate { get; set; }
 
-        public double Calorie { get; set; } 
+        public double Calorie { get; set; } = 0;
+
+        public List<UserFoodPortionMeal> UserFoodPortionMeals { get; set; } = new();
 
 
-
-        public List<User> Users { get; set; } = new();
-
-        public List<Food> Foods { get; set; } = new();
     }
 }

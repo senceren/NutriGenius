@@ -21,13 +21,40 @@ namespace NutriGeniusForm
         public DbSet<Portion> Portions => Set<Portion>();
         public DbSet<FoodCategory> FoodCategories => Set<FoodCategory>();
 
+        public DbSet<UserFoodPortionMeal> UserFoodPortionMeals => Set<UserFoodPortionMeal>();
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"server=(localDB)\MSSQLLocalDB;database=NutriGeniusDb; trusted_connection=true");
+
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<UserFoodPortionMeal>()
+                .HasKey(k => new {k.UserId, k.MealId, k.FoodId, k.PortionId});
+
+            modelBuilder.Entity<UserFoodPortionMeal>()
+                 .HasOne(x => x.User)
+                 .WithMany(x => x.UserFoodPortionMeals)
+                 .HasForeignKey(x => x.UserId);
+
+            modelBuilder.Entity<UserFoodPortionMeal>()
+                .HasOne(x => x.Meal)
+                .WithMany(x => x.UserFoodPortionMeals)
+                .HasForeignKey(x => x.MealId);
+
+            modelBuilder.Entity<UserFoodPortionMeal>()
+                .HasOne(x => x.Food)
+                .WithMany(x => x.UserFoodPortionMeals)
+                .HasForeignKey(x => x.FoodId);
+
+            modelBuilder.Entity<UserFoodPortionMeal>()
+                .HasOne(x => x.Portion)
+                .WithMany(x => x.UserFoodPortionMeals)
+                .HasForeignKey(x => x.PortionId);
+
             modelBuilder.Entity<FoodCategory>().HasData(
                 new FoodCategory { Id = 1, CategoryName = "Et Yemekleri" },
                 new FoodCategory { Id = 2, CategoryName = "Sebze Yemekleri" },
@@ -43,6 +70,7 @@ namespace NutriGeniusForm
                 new FoodCategory { Id = 12, CategoryName = "Süt Ürünleri" },
                 new FoodCategory { Id = 13, CategoryName = "Tahıl Ürünleri" }
                 );
+
         }
     }
 }

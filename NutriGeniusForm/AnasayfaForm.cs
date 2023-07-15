@@ -19,76 +19,142 @@ namespace NutriGeniusForm
     {
         NutriGeniusDbContext db = new NutriGeniusDbContext();
         User user = SessionManager.CurrentUser;
-        User dbUser;
-        Meal? meal;
+        User? dbUser;
+        Meal meal;
+        List<UserFoodPortionMeal> userMeals;
+        double water = 0;
 
         public AnasayfaForm()
         {
+            LoadData();
             InitializeComponent();
-            lblName.Text = user.FirstName;
-            
+            ShowUserName();
+            ShowMealCalorie();
+            LoadGlasses();
 
+        }
+
+        private void LoadData()
+        {
+            dbUser = db.Users
+                .Include(u => u.UserFoodPortionMeals)
+                .ThenInclude(uf => uf.Meal)
+                .Include(u => u.UserFoodPortionMeals)
+                .ThenInclude(uf => uf.Portion)
+                .FirstOrDefault(u => u.Id == user.Id);
+        }
+
+        private void LoadGlasses()
+        {
+            lblWater.Text = "0";
+
+            for (int i = 0; i < 10; i++)
+            {
+                var lvi = new ListViewItem();
+                lvi.Tag = i + 1;  // Tag - etiket, burda değer saklayabiliriz.
+                lvi.ImageKey = "bos.png";
+                lvwWater.TileSize = new Size(74, 74);
+                //lvwWater.Alignment = ListViewAlignment.Top;
+
+                lvwWater.Items.Add(lvi);
+            }
+        }
+
+        private void ShowUserName()
+        {
+            lblName.Text = user.FirstName;
+        }
+
+        private void ShowMealCalorie()
+        {
+            userMeals = dbUser!.UserFoodPortionMeals.Where(uf => uf.Meal?.MealDate == dtpDate.Value.Date).ToList();
+
+            if (userMeals.Count() == 0)
+                return;
+
+            lblBreakfastCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Kahvaltı")?.Meal?.Calorie.ToString();
+            lblLunchCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Öğle Yemeği")?.Meal?.Calorie.ToString();
+            lblDinnerCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Akşam Yemeği")?.Meal?.Calorie.ToString();
+            lblSnackCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Ara Öğün")?.Meal?.Calorie.ToString();
+            lblSumCalorie.Text = userMeals.Sum(um => um.Portion?.Calorie * um.Portion.Amount).ToString();
         }
 
 
         private void btnBreakfast_Click(object sender, EventArgs e)
         {
-            meal = new Breakfast() { MealDate = DateTime.Now.Date };
+            meal = userMeals?.FirstOrDefault(uf => uf.Meal!.MealName == "Kahvaltı")?.Meal;
 
-            CheckMeal();
+            if (meal == null)
+            {
+                meal = new Breakfast() { MealDate = DateTime.Now.Date };
+            }
 
-            SessionManager.CurrentMeal = meal;
-            new YemekEkleForm().ShowDialog();
-
+            CheckMeal(meal);
 
         }
 
         private void btnLunch_Click(object sender, EventArgs e)
         {
-            meal = new Lunch() { MealDate = DateTime.Now.Date  };
+            meal = userMeals?.FirstOrDefault(uf => uf.Meal!.MealName == "Öğle Yemeği")?.Meal;
 
-            CheckMeal();
+            if (meal == null)
+            {
+                meal = new Lunch() { MealDate = DateTime.Now.Date };
+            }
 
-            SessionManager.CurrentMeal = meal;
-            new YemekEkleForm().ShowDialog();
+            CheckMeal(meal);
         }
 
         private void btnDinner_Click(object sender, EventArgs e)
         {
-            meal = new Dinner() { MealDate = DateTime.Now.Date };
+            meal = userMeals?.FirstOrDefault(uf => uf.Meal!.MealName == "Akşam Yemeği")?.Meal;
 
-            CheckMeal();
+            if (meal == null)
+            {
+                meal = new Dinner() { MealDate = DateTime.Now.Date };
+            }
 
-            SessionManager.CurrentMeal = meal;
-            new YemekEkleForm().ShowDialog();
+            CheckMeal(meal);
         }
 
         private void btnSnack_Click(object sender, EventArgs e)
         {
-            meal = new Snack() { MealDate = DateTime.Now.Date };
+            meal = userMeals?.FirstOrDefault(uf => uf.Meal!.MealName == "Ara Öğün")?.Meal;
 
-            CheckMeal();
+            if (meal == null)
+            {
+                meal = new Snack() { MealDate = DateTime.Now.Date };
+            }
 
+            CheckMeal(meal);
+        }
+
+        private void CheckMeal(Meal meal)
+        {
             SessionManager.CurrentMeal = meal;
+            db.Entry(meal).State = EntityState.Detached; // takip etmeyi bırak
+            db.SaveChanges();
+            Close();
             new YemekEkleForm().ShowDialog();
         }
 
-        private void CheckMeal()
+        private void btnProfile_Click(object sender, EventArgs e)
         {
-            bool shouldAddMeal = true;
-            dbUser = db.Users.Include(x => x.Meals).FirstOrDefault(x => x.UserName == user.UserName)!;
+            new ProfilForm().ShowDialog();
+        }
 
-            if (dbUser.Meals.Any(m => m.MealName.Equals(meal!.MealName))
-                && dbUser.Meals.Any(m => m.MealDate.Date == meal!.MealDate.Date))
+        private void lvwWater_DoubleClick(object sender, EventArgs e)
+        {
+            var lvwClicked = lvwWater.SelectedItems[0];
+
+            if (lvwClicked.ImageKey != "dolu.png")
             {
-                shouldAddMeal = false;
+                water += 0.2;
+                lblWater.Text = water.ToString();
+                lvwClicked.ImageKey = "dolu.png";
             }
 
-            if (shouldAddMeal)
-            {
-                dbUser.Meals.Add(meal);
-                db.SaveChanges();
-            }
+
         }
     }
 }

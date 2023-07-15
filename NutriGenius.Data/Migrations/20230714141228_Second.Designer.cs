@@ -12,8 +12,8 @@ using NutriGeniusForm;
 namespace NutriGenius.Data.Migrations
 {
     [DbContext(typeof(NutriGeniusDbContext))]
-    [Migration("20230711123443_Ilk")]
-    partial class Ilk
+    [Migration("20230714141228_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,36 +23,6 @@ namespace NutriGenius.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("FoodMeal", b =>
-                {
-                    b.Property<int>("FoodsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MealsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FoodsId", "MealsId");
-
-                    b.HasIndex("MealsId");
-
-                    b.ToTable("FoodMeal");
-                });
-
-            modelBuilder.Entity("FoodPortion", b =>
-                {
-                    b.Property<int>("FoodsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PortionsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FoodsId", "PortionsId");
-
-                    b.HasIndex("PortionsId");
-
-                    b.ToTable("FoodPortion");
-                });
 
             modelBuilder.Entity("MealUser", b =>
                 {
@@ -77,7 +47,7 @@ namespace NutriGenius.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double?>("Calorie")
+                    b.Property<double>("Calorie")
                         .HasColumnType("float");
 
                     b.Property<string>("Discriminator")
@@ -214,13 +184,18 @@ namespace NutriGenius.Data.Migrations
                     b.Property<double>("Amount")
                         .HasColumnType("float");
 
-                    b.Property<double?>("Calorie")
+                    b.Property<double>("Calorie")
                         .HasColumnType("float");
+
+                    b.Property<int?>("FoodId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Unit")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FoodId");
 
                     b.ToTable("Portions");
                 });
@@ -266,6 +241,31 @@ namespace NutriGenius.Data.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("NutriGenius.Data.Entities.Classes.UserFoodPortionMeal", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MealId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("FoodId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PortionId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "MealId", "FoodId", "PortionId");
+
+                    b.HasIndex("FoodId");
+
+                    b.HasIndex("MealId");
+
+                    b.HasIndex("PortionId");
+
+                    b.ToTable("UserFoodPortionMeals");
+                });
+
             modelBuilder.Entity("NutriGenius.Data.Entities.SubClasses_Meal.Breakfast", b =>
                 {
                     b.HasBaseType("NutriGenius.Data.Entities.Abstract_Class.Meal");
@@ -294,36 +294,6 @@ namespace NutriGenius.Data.Migrations
                     b.HasDiscriminator().HasValue("Snack");
                 });
 
-            modelBuilder.Entity("FoodMeal", b =>
-                {
-                    b.HasOne("NutriGenius.Data.Entities.Classes.Food", null)
-                        .WithMany()
-                        .HasForeignKey("FoodsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NutriGenius.Data.Entities.Abstract_Class.Meal", null)
-                        .WithMany()
-                        .HasForeignKey("MealsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("FoodPortion", b =>
-                {
-                    b.HasOne("NutriGenius.Data.Entities.Classes.Food", null)
-                        .WithMany()
-                        .HasForeignKey("FoodsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NutriGenius.Data.Entities.Classes.Portion", null)
-                        .WithMany()
-                        .HasForeignKey("PortionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("MealUser", b =>
                 {
                     b.HasOne("NutriGenius.Data.Entities.Abstract_Class.Meal", null)
@@ -350,9 +320,73 @@ namespace NutriGenius.Data.Migrations
                     b.Navigation("FoodCategory");
                 });
 
+            modelBuilder.Entity("NutriGenius.Data.Entities.Classes.Portion", b =>
+                {
+                    b.HasOne("NutriGenius.Data.Entities.Classes.Food", null)
+                        .WithMany("Portions")
+                        .HasForeignKey("FoodId");
+                });
+
+            modelBuilder.Entity("NutriGenius.Data.Entities.Classes.UserFoodPortionMeal", b =>
+                {
+                    b.HasOne("NutriGenius.Data.Entities.Classes.Food", "Food")
+                        .WithMany("UserFoodPortionMeals")
+                        .HasForeignKey("FoodId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NutriGenius.Data.Entities.Abstract_Class.Meal", "Meal")
+                        .WithMany("UserFoodPortionMeals")
+                        .HasForeignKey("MealId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NutriGenius.Data.Entities.Classes.Portion", "Portion")
+                        .WithMany("UserFoodPortionMeals")
+                        .HasForeignKey("PortionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("NutriGenius.Data.Entities.Classes.User", "User")
+                        .WithMany("UserFoodPortionMeals")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Food");
+
+                    b.Navigation("Meal");
+
+                    b.Navigation("Portion");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("NutriGenius.Data.Entities.Abstract_Class.Meal", b =>
+                {
+                    b.Navigation("UserFoodPortionMeals");
+                });
+
+            modelBuilder.Entity("NutriGenius.Data.Entities.Classes.Food", b =>
+                {
+                    b.Navigation("Portions");
+
+                    b.Navigation("UserFoodPortionMeals");
+                });
+
             modelBuilder.Entity("NutriGenius.Data.Entities.Classes.FoodCategory", b =>
                 {
                     b.Navigation("Foods");
+                });
+
+            modelBuilder.Entity("NutriGenius.Data.Entities.Classes.Portion", b =>
+                {
+                    b.Navigation("UserFoodPortionMeals");
+                });
+
+            modelBuilder.Entity("NutriGenius.Data.Entities.Classes.User", b =>
+                {
+                    b.Navigation("UserFoodPortionMeals");
                 });
 #pragma warning restore 612, 618
         }
