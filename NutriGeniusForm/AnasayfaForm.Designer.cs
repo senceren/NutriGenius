@@ -256,6 +256,7 @@
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(207, 27);
             dtpDate.TabIndex = 13;
+            dtpDate.ValueChanged += dtpDate_ValueChanged;
             // 
             // panel2
             // 

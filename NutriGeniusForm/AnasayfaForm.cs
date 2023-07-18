@@ -45,7 +45,7 @@ namespace NutriGeniusForm
 
         private void LoadGlasses()
         {
-
+            
             lblWater.Text = (dbUser.TotalGlass * 0.2).ToString("F1");
 
             for (int i = 0; i < 10; i++)
@@ -76,8 +76,11 @@ namespace NutriGeniusForm
         {
             userMeals = dbUser!.UserFoodPortionMeals.Where(uf => uf.Meal?.MealDate == dtpDate.Value.Date).ToList();
 
-            if (userMeals.Count() == 0)
+            if (userMeals.Count == 0)
+            {
+                lblBreakfastCalorie.Text = lblLunchCalorie.Text = lblDinnerCalorie.Text  = lblSnackCalorie.Text = lblSumCalorie.Text = userMeals.Count.ToString();
                 return;
+            }
 
             lblBreakfastCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Kahvaltı")?.Meal?.Calorie.ToString();
             lblLunchCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Öğle Yemeği")?.Meal?.Calorie.ToString();
@@ -181,6 +184,12 @@ namespace NutriGeniusForm
             }
 
             db.SaveChanges();
+        }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            ShowMealCalorie();
+            LoadGlasses();
         }
     }
 }

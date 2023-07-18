@@ -72,5 +72,10 @@ namespace NutriGeniusForm
                  .ThenInclude(uf => uf.Portion)
                  .FirstOrDefault(u => u.Id == user.Id);
         }
+
+        private void dtpDate_ValueChanged(object sender, EventArgs e)
+        {
+            ListOfMeals();
+        }
     }
 }

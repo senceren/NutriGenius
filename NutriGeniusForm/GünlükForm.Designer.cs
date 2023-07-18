@@ -181,6 +181,7 @@
             dtpDate.Name = "dtpDate";
             dtpDate.Size = new Size(250, 27);
             dtpDate.TabIndex = 31;
+            dtpDate.ValueChanged += dtpDate_ValueChanged;
             // 
             // GünlükForm
             // 

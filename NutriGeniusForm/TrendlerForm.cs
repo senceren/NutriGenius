@@ -26,7 +26,7 @@ namespace NutriGeniusForm
             LoadData();
             UserFoods(-7);
             AllUserFoods(-7);
-            
+
             lblName.Text = user.FirstName;
         }
 
