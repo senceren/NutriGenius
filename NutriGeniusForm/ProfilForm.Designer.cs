@@ -77,7 +77,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(348, 395);
+            label7.Location = new Point(431, 390);
             label7.Name = "label7";
             label7.Size = new Size(42, 23);
             label7.TabIndex = 26;
@@ -89,7 +89,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(327, 259);
+            label5.Location = new Point(410, 254);
             label5.Name = "label5";
             label5.Size = new Size(61, 23);
             label5.TabIndex = 24;
@@ -101,7 +101,7 @@
             label4.BackColor = Color.Transparent;
             label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label4.ForeColor = Color.Black;
-            label4.Location = new Point(353, 221);
+            label4.Location = new Point(436, 216);
             label4.Name = "label4";
             label4.Size = new Size(35, 23);
             label4.TabIndex = 23;
@@ -113,7 +113,7 @@
             label3.BackColor = Color.Transparent;
             label3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.Black;
-            label3.Location = new Point(346, 353);
+            label3.Location = new Point(429, 348);
             label3.Name = "label3";
             label3.Size = new Size(43, 23);
             label3.TabIndex = 22;
@@ -122,7 +122,7 @@
             // txtHeight
             // 
             txtHeight.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtHeight.Location = new Point(395, 353);
+            txtHeight.Location = new Point(478, 348);
             txtHeight.Name = "txtHeight";
             txtHeight.Size = new Size(137, 27);
             txtHeight.TabIndex = 21;
@@ -130,7 +130,7 @@
             // txtWeight
             // 
             txtWeight.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtWeight.Location = new Point(395, 391);
+            txtWeight.Location = new Point(478, 386);
             txtWeight.Name = "txtWeight";
             txtWeight.Size = new Size(137, 27);
             txtWeight.TabIndex = 20;
@@ -138,7 +138,7 @@
             // txtLastName
             // 
             txtLastName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtLastName.Location = new Point(395, 255);
+            txtLastName.Location = new Point(478, 250);
             txtLastName.Name = "txtLastName";
             txtLastName.Size = new Size(137, 27);
             txtLastName.TabIndex = 15;
@@ -146,7 +146,7 @@
             // txtFirstName
             // 
             txtFirstName.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtFirstName.Location = new Point(395, 217);
+            txtFirstName.Location = new Point(478, 212);
             txtFirstName.Name = "txtFirstName";
             txtFirstName.Size = new Size(137, 27);
             txtFirstName.TabIndex = 14;
@@ -156,7 +156,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(281, 304);
+            label2.Location = new Point(364, 299);
             label2.Name = "label2";
             label2.Size = new Size(120, 30);
             label2.TabIndex = 18;
@@ -176,7 +176,7 @@
             label6.AutoSize = true;
             label6.BackColor = Color.White;
             label6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(143, 450);
+            label6.Location = new Point(210, 450);
             label6.Name = "label6";
             label6.Size = new Size(65, 23);
             label6.TabIndex = 16;
@@ -186,7 +186,7 @@
             // 
             btnDaily.BackgroundImage = Properties.Resources.calendar;
             btnDaily.BackgroundImageLayout = ImageLayout.Zoom;
-            btnDaily.Location = new Point(143, 383);
+            btnDaily.Location = new Point(210, 383);
             btnDaily.Name = "btnDaily";
             btnDaily.Size = new Size(64, 61);
             btnDaily.TabIndex = 15;
@@ -198,7 +198,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.White;
             label8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(654, 447);
+            label8.Location = new Point(759, 447);
             label8.Name = "label8";
             label8.Size = new Size(72, 23);
             label8.TabIndex = 14;
@@ -209,7 +209,7 @@
             btnTrendies.BackColor = Color.Transparent;
             btnTrendies.BackgroundImage = Properties.Resources.barchart1;
             btnTrendies.BackgroundImageLayout = ImageLayout.Zoom;
-            btnTrendies.Location = new Point(654, 383);
+            btnTrendies.Location = new Point(759, 383);
             btnTrendies.Name = "btnTrendies";
             btnTrendies.Size = new Size(69, 61);
             btnTrendies.TabIndex = 13;
@@ -223,7 +223,7 @@
             label9.BackColor = Color.Orange;
             label9.Font = new Font("Segoe UI Semibold", 11.2F, FontStyle.Bold, GraphicsUnit.Point);
             label9.ForeColor = Color.Black;
-            label9.Location = new Point(369, 168);
+            label9.Location = new Point(452, 163);
             label9.Name = "label9";
             label9.Size = new Size(129, 25);
             label9.TabIndex = 28;
@@ -233,7 +233,7 @@
             // 
             btnSave.BackColor = Color.YellowGreen;
             btnSave.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnSave.Location = new Point(395, 440);
+            btnSave.Location = new Point(478, 435);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(137, 30);
             btnSave.TabIndex = 29;
@@ -246,8 +246,8 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.profil;
-            BackgroundImageLayout = ImageLayout.Zoom;
-            ClientSize = new Size(842, 553);
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(1022, 553);
             Controls.Add(btnSave);
             Controls.Add(label9);
             Controls.Add(txtBirthDate);

@@ -22,7 +22,6 @@ namespace NutriGeniusForm
         User? dbUser;
         Meal meal;
         List<UserFoodPortionMeal> userMeals;
-        double water = 0;
 
         public AnasayfaForm()
         {
@@ -46,18 +45,26 @@ namespace NutriGeniusForm
 
         private void LoadGlasses()
         {
-            lblWater.Text = "0";
+
+            lblWater.Text = (dbUser.TotalGlass * 0.2).ToString("F1");
 
             for (int i = 0; i < 10; i++)
             {
                 var lvi = new ListViewItem();
-                lvi.Tag = i + 1;  // Tag - etiket, burda değer saklayabiliriz.
-                lvi.ImageKey = "bos.png";
-                lvwWater.TileSize = new Size(74, 74);
-                //lvwWater.Alignment = ListViewAlignment.Top;
 
-                lvwWater.Items.Add(lvi);
+                if (i < dbUser.TotalGlass)
+                {
+                    lvi.ImageKey = "dolu.png";
+                    lvwWater.Items.Add(lvi);
+                }
+                else
+                {
+                    lvi.ImageKey = "bos.png";
+                    lvwWater.Items.Add(lvi);
+                }
+
             }
+
         }
 
         private void ShowUserName()
@@ -145,16 +152,35 @@ namespace NutriGeniusForm
 
         private void lvwWater_DoubleClick(object sender, EventArgs e)
         {
+
+            double water = dbUser.TotalGlass * 0.2;
             var lvwClicked = lvwWater.SelectedItems[0];
 
-            if (lvwClicked.ImageKey != "dolu.png")
+            if (lvwClicked.ImageKey == "bos.png")
             {
                 water += 0.2;
-                lblWater.Text = water.ToString();
                 lvwClicked.ImageKey = "dolu.png";
+                lblWater.Text = water.ToString("F1");
+                dbUser.TotalGlass++;
+            }
+            else
+            {
+                water -= 0.2;
+                lvwClicked.ImageKey = "bos.png";
+                lblWater.Text = water.ToString("F1");
+                dbUser.TotalGlass--;
             }
 
+            if (water == 2)
+            {
+                lblTebrik.Visible = true;
+            }
+            else
+            {
+                lblTebrik.Visible = false;
+            }
 
+            db.SaveChanges();
         }
     }
 }

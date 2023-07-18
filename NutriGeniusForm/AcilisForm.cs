@@ -29,7 +29,7 @@ namespace NutriGeniusForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            new AnasayfaForm().ShowDialog();    
+            new AnasayfaForm().ShowDialog();
         }
     }
 }

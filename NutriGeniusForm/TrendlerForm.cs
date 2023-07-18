@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NutriGenius.Data.Entities;
 using NutriGenius.Data.Entities.Classes;
+using NutriGenius.Data.Entities.SubClasses_Meal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace NutriGeniusForm
 {
@@ -17,43 +19,129 @@ namespace NutriGeniusForm
     {
         NutriGeniusDbContext db = new NutriGeniusDbContext();
         User user = SessionManager.CurrentUser;
+        User? dbUser;
         public TrendlerForm()
         {
             InitializeComponent();
-            // kullacının bir haftada sabah en cok yediği yemek 
-            // kullacının bir ayda sabah en cok yediği yemek 
-
-            // tüm kullacının bir haftada sabah en cok yediği yemek 
-            // tüm kullacının bir ayda sabah en cok yediği yemek 
-
-            // tüm kullanıcılarda tüm öğünlerde yenen top 5 yemek 
-
-            Top5Food();
+            LoadData();
+            UserFoods(-7);
+            AllUserFoods(-7);
+            
             lblName.Text = user.FirstName;
         }
 
-        private void Top5Food()
+        private void LoadData()
         {
-            Dictionary<int, int> IdyemekTekrarı = new Dictionary<int, int>();
-            
+            dbUser = db.Users
+              .Include(u => u.UserFoodPortionMeals)
+              .ThenInclude(uf => uf.Meal)
+              .Include(u => u.UserFoodPortionMeals)
+              .ThenInclude(uf => uf.Food)
+              .Include(u => u.UserFoodPortionMeals)
+              .ThenInclude(uf => uf.Portion)
+              .FirstOrDefault(u => u.Id == user.Id);
+        }
 
-            foreach (var item in db.Users.Include(x => x.UserFoodPortionMeals))
+        private void AllUserFoods(int day)
+        {
+            List<UserFoodPortionMeal> breakfasts = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            List<UserFoodPortionMeal> lunches = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            List<UserFoodPortionMeal> dinners = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            List<UserFoodPortionMeal> snacks = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            int maxBreakfastFoodId = FindFoodId(breakfasts);
+            int maxLunchFoodId = FindFoodId(lunches);
+            int maxDinnerFoodId = FindFoodId(dinners);
+            int maxSnackFoodId = FindFoodId(snacks);
+
+            lblBreakfastSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxBreakfastFoodId).First().Food.FoodName;
+
+            lblLunchSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxLunchFoodId).First().Food.FoodName;
+
+            lblDinnerSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxDinnerFoodId).First().Food.FoodName;
+
+            lblSnackSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxSnackFoodId).First().Food.FoodName;
+
+        }
+        private void UserFoods(int day)
+        {
+            List<UserFoodPortionMeal> ufListBr = dbUser!.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı"
+           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            List<UserFoodPortionMeal> ufListLn = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği"
+           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            List<UserFoodPortionMeal> ufListDn = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği"
+           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            List<UserFoodPortionMeal> ufListSn = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün"
+           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
+
+            int maxBreakfastFoodId = FindFoodId(ufListBr);
+            int maxLunchFoodId = FindFoodId(ufListLn);
+            int maxDinnerFoodId = FindFoodId(ufListDn);
+            int maxSnackFoodId = FindFoodId(ufListSn);
+
+            lblBreakfastUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxBreakfastFoodId).First().Food.FoodName;
+
+            lblLunchUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxLunchFoodId).First().Food.FoodName;
+
+            lblDinnerUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxDinnerFoodId).First().Food.FoodName;
+
+            lblSnackUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxSnackFoodId).First().Food.FoodName;
+
+        }
+
+        private static int FindFoodId(List<UserFoodPortionMeal> ufList)
+        {
+            int maxCount = 0;
+            int count = 0;
+            int maxFoodId = 0;
+
+            for (int i = 0; i < ufList.Count - 1; i++)
             {
-                foreach (var item1 in item.UserFoodPortionMeals)
-                {
-                    int Id = item1.FoodId;
-                    int yemekTekrarı = 1;
-                    // yemeklere gezicez. her yemeğin ıdsini ve adetini tutucaz.
-                    // ıdsi tüm geçmiş
-                    IdyemekTekrarı.Add(Id, yemekTekrarı);
+                count = 0;
 
+                for (int j = i + 1; j < ufList.Count; j++)
+                {
+                    if (ufList[i].FoodId == ufList[j].FoodId)
+                    {
+                        count++;
+                    }
+
+                }
+                if (count > maxCount)
+                {
+                    maxCount = count;
+                    maxFoodId = ufList[i].FoodId;
                 }
 
             }
 
-            //dgvTop5.DataSource = IdyemekTekrarı.GroupBy(x => x.Key).ToDictionary(g => g.Sum(x => x.Value)).OrderByDescending(x => x.Value).Take(5).ToList();
+            if (maxFoodId == 0)
+            {
+                maxFoodId = ufList[0].FoodId;
+            }
+
+            return maxFoodId;
+        }
 
 
+
+        private void mtnMonthly_Click(object sender, EventArgs e)
+        {
+            UserFoods(-30);
+            AllUserFoods(-30);
+
+        }
+
+        private void btnWeekly_Click(object sender, EventArgs e)
+        {
+            UserFoods(-7);
+            AllUserFoods(-7);
         }
     }
 }

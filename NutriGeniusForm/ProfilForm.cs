@@ -27,7 +27,7 @@ namespace NutriGeniusForm
         private void Connect()
         {
             db.Entry(user).State = EntityState.Unchanged;
-           
+
         }
 
         private void PersonelInformations()
@@ -56,10 +56,10 @@ namespace NutriGeniusForm
             try
             {
                 if (string.IsNullOrEmpty(txtFirstName.Text) ||
-                   string.IsNullOrEmpty(txtLastName.Text) ||                 
+                   string.IsNullOrEmpty(txtLastName.Text) ||
                    string.IsNullOrEmpty(txtHeight.Text) ||
                    string.IsNullOrEmpty(txtWeight.Text))
-                  
+
                 {
                     MessageBox.Show("İlgili alanlar boş olamaz!");
                     return;

@@ -70,6 +70,7 @@
             label8 = new Label();
             label6 = new Label();
             label3 = new Label();
+            lblTebrik = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel2.SuspendLayout();
@@ -83,7 +84,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(18, 31);
+            label1.Location = new Point(25, 28);
             label1.Name = "label1";
             label1.Size = new Size(89, 25);
             label1.TabIndex = 0;
@@ -94,7 +95,7 @@
             lblName.AutoSize = true;
             lblName.BackColor = Color.Transparent;
             lblName.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
-            lblName.Location = new Point(101, 31);
+            lblName.Location = new Point(111, 28);
             lblName.Name = "lblName";
             lblName.Size = new Size(64, 25);
             lblName.TabIndex = 1;
@@ -104,7 +105,7 @@
             // 
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.Image = Properties.Resources.happy__1_;
-            pictureBox1.Location = new Point(158, 24);
+            pictureBox1.Location = new Point(165, 21);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(67, 35);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -116,7 +117,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(739, 78);
+            label2.Location = new Point(928, 79);
             label2.Name = "label2";
             label2.Size = new Size(50, 23);
             label2.TabIndex = 8;
@@ -127,7 +128,7 @@
             btnProfile.BackColor = Color.Transparent;
             btnProfile.BackgroundImage = Properties.Resources.user;
             btnProfile.BackgroundImageLayout = ImageLayout.Zoom;
-            btnProfile.Location = new Point(736, 15);
+            btnProfile.Location = new Point(916, 12);
             btnProfile.Name = "btnProfile";
             btnProfile.Size = new Size(62, 61);
             btnProfile.TabIndex = 7;
@@ -138,7 +139,7 @@
             // 
             lblSumCalorie.BackColor = Color.Transparent;
             lblSumCalorie.Font = new Font("Comic Sans MS", 15.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSumCalorie.Location = new Point(376, 93);
+            lblSumCalorie.Location = new Point(480, 93);
             lblSumCalorie.Name = "lblSumCalorie";
             lblSumCalorie.RightToLeft = RightToLeft.Yes;
             lblSumCalorie.Size = new Size(111, 31);
@@ -150,7 +151,7 @@
             // 
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Comic Sans MS", 11.2F, FontStyle.Regular, GraphicsUnit.Point);
-            label5.Location = new Point(370, 159);
+            label5.Location = new Point(474, 159);
             label5.Name = "label5";
             label5.Size = new Size(124, 26);
             label5.TabIndex = 6;
@@ -161,7 +162,7 @@
             // 
             pictureBox3.BackColor = Color.Transparent;
             pictureBox3.Image = Properties.Resources.Blue_Green_Grey_Chiropractic_Logo___1_;
-            pictureBox3.Location = new Point(98, -15);
+            pictureBox3.Location = new Point(202, -15);
             pictureBox3.Name = "pictureBox3";
             pictureBox3.Size = new Size(667, 352);
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -182,7 +183,7 @@
             // 
             btnBreakfast.BackColor = Color.Transparent;
             btnBreakfast.BackgroundImageLayout = ImageLayout.Stretch;
-            btnBreakfast.ImageIndex = 1;
+            btnBreakfast.ImageIndex = 3;
             btnBreakfast.ImageList = ımageList1;
             btnBreakfast.Location = new Point(136, 62);
             btnBreakfast.Name = "btnBreakfast";
@@ -193,13 +194,13 @@
             // 
             // ımageList1
             // 
-            ımageList1.ColorDepth = ColorDepth.Depth8Bit;
+            ımageList1.ColorDepth = ColorDepth.Depth32Bit;
             ımageList1.ImageStream = (ImageListStreamer)resources.GetObject("ımageList1.ImageStream");
             ımageList1.TransparentColor = Color.Transparent;
             ımageList1.Images.SetKeyName(0, "Blue Green Grey Chiropractic Logo  (2).png");
-            ımageList1.Images.SetKeyName(1, "ekle.png");
-            ımageList1.Images.SetKeyName(2, "dolu.png");
-            ımageList1.Images.SetKeyName(3, "bos.png");
+            ımageList1.Images.SetKeyName(1, "dolu.png");
+            ımageList1.Images.SetKeyName(2, "bos.png");
+            ımageList1.Images.SetKeyName(3, "ekle.png");
             // 
             // lblBreakfastCalorie
             // 
@@ -229,11 +230,11 @@
             lvwWater.BackColor = Color.LightGray;
             lvwWater.BorderStyle = BorderStyle.FixedSingle;
             lvwWater.LargeImageList = ilWater;
-            lvwWater.Location = new Point(12, 420);
+            lvwWater.Location = new Point(12, 425);
             lvwWater.Margin = new Padding(1);
             lvwWater.Name = "lvwWater";
             lvwWater.Scrollable = false;
-            lvwWater.Size = new Size(822, 67);
+            lvwWater.Size = new Size(1001, 67);
             lvwWater.TabIndex = 1;
             lvwWater.TileSize = new Size(74, 74);
             lvwWater.UseCompatibleStateImageBehavior = false;
@@ -241,19 +242,19 @@
             // 
             // ilWater
             // 
-            ilWater.ColorDepth = ColorDepth.Depth8Bit;
+            ilWater.ColorDepth = ColorDepth.Depth32Bit;
             ilWater.ImageStream = (ImageListStreamer)resources.GetObject("ilWater.ImageStream");
             ilWater.TransparentColor = Color.Transparent;
-            ilWater.Images.SetKeyName(0, "dolu.png");
-            ilWater.Images.SetKeyName(1, "bos.png");
+            ilWater.Images.SetKeyName(0, "bos.png");
+            ilWater.Images.SetKeyName(1, "dolu.png");
             // 
             // dtpDate
             // 
             dtpDate.CalendarMonthBackground = Color.Transparent;
             dtpDate.Format = DateTimePickerFormat.Short;
-            dtpDate.Location = new Point(25, 75);
+            dtpDate.Location = new Point(25, 72);
             dtpDate.Name = "dtpDate";
-            dtpDate.Size = new Size(140, 27);
+            dtpDate.Size = new Size(207, 27);
             dtpDate.TabIndex = 13;
             // 
             // panel2
@@ -264,7 +265,7 @@
             panel2.Controls.Add(label21);
             panel2.Controls.Add(label9);
             panel2.Controls.Add(lblBreakfastCalorie);
-            panel2.Location = new Point(14, 258);
+            panel2.Location = new Point(25, 258);
             panel2.Name = "panel2";
             panel2.Size = new Size(196, 117);
             panel2.TabIndex = 14;
@@ -287,7 +288,7 @@
             panel3.Controls.Add(label12);
             panel3.Controls.Add(label13);
             panel3.Controls.Add(lblLunchCalorie);
-            panel3.Location = new Point(224, 258);
+            panel3.Location = new Point(275, 258);
             panel3.Name = "panel3";
             panel3.Size = new Size(196, 117);
             panel3.TabIndex = 15;
@@ -296,7 +297,7 @@
             // 
             btnLunch.BackColor = Color.Transparent;
             btnLunch.BackgroundImageLayout = ImageLayout.Stretch;
-            btnLunch.ImageIndex = 1;
+            btnLunch.ImageIndex = 3;
             btnLunch.ImageList = ımageList1;
             btnLunch.Location = new Point(136, 62);
             btnLunch.Name = "btnLunch";
@@ -355,7 +356,7 @@
             panel4.Controls.Add(label16);
             panel4.Controls.Add(label18);
             panel4.Controls.Add(lblDinnerCalorie);
-            panel4.Location = new Point(430, 258);
+            panel4.Location = new Point(542, 258);
             panel4.Name = "panel4";
             panel4.Size = new Size(196, 117);
             panel4.TabIndex = 15;
@@ -364,7 +365,7 @@
             // 
             btnDinner.BackColor = Color.Transparent;
             btnDinner.BackgroundImageLayout = ImageLayout.Stretch;
-            btnDinner.ImageIndex = 1;
+            btnDinner.ImageIndex = 3;
             btnDinner.ImageList = ımageList1;
             btnDinner.Location = new Point(136, 62);
             btnDinner.Name = "btnDinner";
@@ -423,7 +424,7 @@
             panel5.Controls.Add(label22);
             panel5.Controls.Add(label23);
             panel5.Controls.Add(lblSnackCalorie);
-            panel5.Location = new Point(638, 258);
+            panel5.Location = new Point(814, 258);
             panel5.Name = "panel5";
             panel5.Size = new Size(196, 117);
             panel5.TabIndex = 15;
@@ -432,7 +433,7 @@
             // 
             btnSnack.BackColor = Color.Transparent;
             btnSnack.BackgroundImageLayout = ImageLayout.Stretch;
-            btnSnack.ImageIndex = 1;
+            btnSnack.ImageIndex = 3;
             btnSnack.ImageList = ımageList1;
             btnSnack.Location = new Point(136, 62);
             btnSnack.Name = "btnSnack";
@@ -499,7 +500,7 @@
             label8.AutoSize = true;
             label8.BackColor = Color.Transparent;
             label8.Font = new Font("Segoe UI Semibold", 11.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(64, 503);
+            label8.Location = new Point(53, 503);
             label8.Name = "label8";
             label8.Size = new Size(46, 25);
             label8.TabIndex = 2;
@@ -511,7 +512,7 @@
             label6.BackColor = Color.Transparent;
             label6.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             label6.ForeColor = Color.DarkSlateGray;
-            label6.Location = new Point(703, 503);
+            label6.Location = new Point(899, 504);
             label6.Name = "label6";
             label6.Size = new Size(111, 20);
             label6.TabIndex = 0;
@@ -528,12 +529,26 @@
             label3.TabIndex = 16;
             label3.Text = "SU";
             // 
+            // lblTebrik
+            // 
+            lblTebrik.AutoSize = true;
+            lblTebrik.BackColor = Color.Transparent;
+            lblTebrik.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTebrik.ForeColor = Color.Red;
+            lblTebrik.Location = new Point(451, 504);
+            lblTebrik.Name = "lblTebrik";
+            lblTebrik.Size = new Size(113, 25);
+            lblTebrik.TabIndex = 17;
+            lblTebrik.Text = "TEBRİKLER!";
+            lblTebrik.Visible = false;
+            // 
             // AnasayfaForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.arasayfalar;
-            ClientSize = new Size(842, 553);
+            ClientSize = new Size(1022, 553);
+            Controls.Add(lblTebrik);
             Controls.Add(label3);
             Controls.Add(lvwWater);
             Controls.Add(label6);
@@ -616,5 +631,6 @@
         private Label label8;
         private Label label6;
         private Label label3;
+        private Label lblTebrik;
     }
 }

@@ -91,6 +91,8 @@ namespace NutriGenius.Data.Entities.Classes
             }
         }
 
+        public int TotalGlass { get; set; } 
+
         public List<UserFoodPortionMeal> UserFoodPortionMeals { get; set; } = new();
 
 
