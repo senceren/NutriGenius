@@ -41,6 +41,14 @@
             label4 = new Label();
             lstSnack = new ListBox();
             dtpDate = new DateTimePicker();
+            label12 = new Label();
+            lblSnackCalorie = new Label();
+            label10 = new Label();
+            lblDinnerCalorie = new Label();
+            label8 = new Label();
+            lblLunchCalorie = new Label();
+            label6 = new Label();
+            lblBreakfastCalorie = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -183,12 +191,116 @@
             dtpDate.TabIndex = 31;
             dtpDate.ValueChanged += dtpDate_ValueChanged;
             // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.BackColor = Color.Transparent;
+            label12.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.Black;
+            label12.Location = new Point(922, 492);
+            label12.Name = "label12";
+            label12.Size = new Size(39, 28);
+            label12.TabIndex = 51;
+            label12.Text = "cal";
+            // 
+            // lblSnackCalorie
+            // 
+            lblSnackCalorie.AutoSize = true;
+            lblSnackCalorie.BackColor = Color.Transparent;
+            lblSnackCalorie.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSnackCalorie.ForeColor = Color.DarkGreen;
+            lblSnackCalorie.Location = new Point(866, 492);
+            lblSnackCalorie.Name = "lblSnackCalorie";
+            lblSnackCalorie.Size = new Size(24, 28);
+            lblSnackCalorie.TabIndex = 47;
+            lblSnackCalorie.Text = "0";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.BackColor = Color.Transparent;
+            label10.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label10.ForeColor = Color.Black;
+            label10.Location = new Point(653, 492);
+            label10.Name = "label10";
+            label10.Size = new Size(39, 28);
+            label10.TabIndex = 52;
+            label10.Text = "cal";
+            // 
+            // lblDinnerCalorie
+            // 
+            lblDinnerCalorie.AutoSize = true;
+            lblDinnerCalorie.BackColor = Color.Transparent;
+            lblDinnerCalorie.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDinnerCalorie.ForeColor = Color.DarkGreen;
+            lblDinnerCalorie.Location = new Point(602, 492);
+            lblDinnerCalorie.Name = "lblDinnerCalorie";
+            lblDinnerCalorie.Size = new Size(24, 28);
+            lblDinnerCalorie.TabIndex = 48;
+            lblDinnerCalorie.Text = "0";
+            // 
+            // label8
+            // 
+            label8.AutoSize = true;
+            label8.BackColor = Color.Transparent;
+            label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.Black;
+            label8.Location = new Point(399, 492);
+            label8.Name = "label8";
+            label8.Size = new Size(39, 28);
+            label8.TabIndex = 53;
+            label8.Text = "cal";
+            // 
+            // lblLunchCalorie
+            // 
+            lblLunchCalorie.AutoSize = true;
+            lblLunchCalorie.BackColor = Color.Transparent;
+            lblLunchCalorie.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLunchCalorie.ForeColor = Color.DarkGreen;
+            lblLunchCalorie.Location = new Point(336, 492);
+            lblLunchCalorie.Name = "lblLunchCalorie";
+            lblLunchCalorie.Size = new Size(24, 28);
+            lblLunchCalorie.TabIndex = 49;
+            lblLunchCalorie.Text = "0";
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.BackColor = Color.Transparent;
+            label6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label6.ForeColor = Color.Black;
+            label6.Location = new Point(145, 492);
+            label6.Name = "label6";
+            label6.Size = new Size(39, 28);
+            label6.TabIndex = 54;
+            label6.Text = "cal";
+            // 
+            // lblBreakfastCalorie
+            // 
+            lblBreakfastCalorie.AutoSize = true;
+            lblBreakfastCalorie.BackColor = Color.Transparent;
+            lblBreakfastCalorie.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblBreakfastCalorie.ForeColor = Color.DarkGreen;
+            lblBreakfastCalorie.Location = new Point(84, 492);
+            lblBreakfastCalorie.Name = "lblBreakfastCalorie";
+            lblBreakfastCalorie.Size = new Size(24, 28);
+            lblBreakfastCalorie.TabIndex = 50;
+            lblBreakfastCalorie.Text = "0";
+            // 
             // GünlükForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.arasayfalar;
-            ClientSize = new Size(1022, 553);
+            ClientSize = new Size(1022, 672);
+            Controls.Add(label12);
+            Controls.Add(lblSnackCalorie);
+            Controls.Add(label10);
+            Controls.Add(lblDinnerCalorie);
+            Controls.Add(label8);
+            Controls.Add(lblLunchCalorie);
+            Controls.Add(label6);
+            Controls.Add(lblBreakfastCalorie);
             Controls.Add(dtpDate);
             Controls.Add(label4);
             Controls.Add(lstSnack);
@@ -227,5 +339,13 @@
         private Label label4;
         private ListBox lstSnack;
         private DateTimePicker dtpDate;
+        private Label label12;
+        private Label lblSnackCalorie;
+        private Label label10;
+        private Label lblDinnerCalorie;
+        private Label label8;
+        private Label lblLunchCalorie;
+        private Label label6;
+        private Label lblBreakfastCalorie;
     }
 }

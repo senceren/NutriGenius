@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NutriGenius.Data.Entities.Abstract_Class.Meal" Collapsed="true">
+    <Position X="2.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAACAAAAQAAAAAAAAAAAAAAIAAABAAAAAA=</HashCode>
+      <FileName>Entities\Abstract Class\Meal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.Classes.Food">
+    <Position X="5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEACAAIAAAAAAAAEAACAAAAAAAAAABAAIAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Classes\Food.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.Classes.FoodCategory" Collapsed="true">
+    <Position X="5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACEAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Classes\FoodCategory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.Classes.Portion" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAEIAAAAACAAAAAAAAAIAAABAAAAAA=</HashCode>
+      <FileName>Entities\Classes\Portion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.Classes.User">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAECABAAAAASABAAAAAQAACAAABAiMQAAAgAABAg=</HashCode>
+      <FileName>Entities\Classes\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.Classes.UserFoodPortionMeal" Collapsed="true">
+    <Position X="4.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABgAAAAAAAAAAAAAAAAAwAQgAAAAAQAAAAAgAAAAA=</HashCode>
+      <FileName>Entities\Classes\UserFoodPortionMeal.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.Seed.FoodSeed" Collapsed="true">
+    <Position X="10.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\Seed\FoodSeed.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.SubClasses_Meal.Breakfast" Collapsed="true">
+    <Position X="2.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SubClasses_Meal\Breakfast.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.SubClasses_Meal.Dinner" Collapsed="true">
+    <Position X="2.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SubClasses_Meal\Dinner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.SubClasses_Meal.Lunch" Collapsed="true">
+    <Position X="2.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SubClasses_Meal\Lunch.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.SubClasses_Meal.Snack" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SubClasses_Meal\Snack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NutriGenius.Data.Entities.SessionManager" Collapsed="true">
+    <Position X="10.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAACAAAIACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Entities\SessionManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="NutriGenius.Data.Entities.Enums.Gender" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>Entities\Enums\Gender.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="NutriGenius.Data.Entities.Enums.Unit" Collapsed="true">
+    <Position X="7.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAQCAAAAAAAAAAAAIAAgAAA=</HashCode>
+      <FileName>Entities\Enums\Unit.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

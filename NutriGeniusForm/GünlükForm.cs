@@ -26,7 +26,15 @@ namespace NutriGeniusForm
             Connect();
             InitializeComponent();
             ListOfMeals();
+            ListCalories();
+        }
 
+        private void ListCalories()
+        {
+            lblBreakfastCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal?.Calorie.ToString();
+            lblLunchCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal.Calorie.ToString();
+            lblDinnerCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal.Calorie.ToString();
+            lblSnackCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal.Calorie.ToString();
         }
 
         private void ListOfMeals()

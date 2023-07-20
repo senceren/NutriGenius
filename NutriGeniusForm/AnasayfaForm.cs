@@ -22,6 +22,7 @@ namespace NutriGeniusForm
         User? dbUser;
         Meal meal;
         List<UserFoodPortionMeal> userMeals;
+        double water;
 
         public AnasayfaForm()
         {
@@ -45,24 +46,21 @@ namespace NutriGeniusForm
 
         private void LoadGlasses()
         {
-            
-            lblWater.Text = (dbUser.TotalGlass * 0.2).ToString("F1");
+
+            lvwWater.Items.Clear();
+            water = dbUser!.TotalGlass * 0.2;
+            lblWater.Text = water.ToString("F1");
 
             for (int i = 0; i < 10; i++)
             {
                 var lvi = new ListViewItem();
 
                 if (i < dbUser.TotalGlass)
-                {
                     lvi.ImageKey = "dolu.png";
-                    lvwWater.Items.Add(lvi);
-                }
                 else
-                {
                     lvi.ImageKey = "bos.png";
-                    lvwWater.Items.Add(lvi);
-                }
 
+                lvwWater.Items.Add(lvi);
             }
 
         }
@@ -78,7 +76,7 @@ namespace NutriGeniusForm
 
             if (userMeals.Count == 0)
             {
-                lblBreakfastCalorie.Text = lblLunchCalorie.Text = lblDinnerCalorie.Text  = lblSnackCalorie.Text = lblSumCalorie.Text = userMeals.Count.ToString();
+                lblBreakfastCalorie.Text = lblLunchCalorie.Text = lblDinnerCalorie.Text = lblSnackCalorie.Text = lblSumCalorie.Text = userMeals.Count.ToString();
                 return;
             }
 
@@ -155,8 +153,7 @@ namespace NutriGeniusForm
 
         private void lvwWater_DoubleClick(object sender, EventArgs e)
         {
-
-            double water = dbUser.TotalGlass * 0.2;
+           
             var lvwClicked = lvwWater.SelectedItems[0];
 
             if (lvwClicked.ImageKey == "bos.png")
@@ -165,6 +162,7 @@ namespace NutriGeniusForm
                 lvwClicked.ImageKey = "dolu.png";
                 lblWater.Text = water.ToString("F1");
                 dbUser.TotalGlass++;
+
             }
             else
             {

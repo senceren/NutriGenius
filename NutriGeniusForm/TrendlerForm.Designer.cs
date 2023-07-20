@@ -47,13 +47,12 @@
             pictureBox2 = new PictureBox();
             label7 = new Label();
             label9 = new Label();
-            dgvTop5 = new DataGridView();
             lblSnackUser = new Label();
             lblDinnerUser = new Label();
             lblLunchUser = new Label();
+            lstTop5 = new ListBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dgvTop5).BeginInit();
             SuspendLayout();
             // 
             // btnWeekly
@@ -108,7 +107,7 @@
             label3.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label3.Location = new Point(155, 73);
             label3.Name = "label3";
-            label3.Size = new Size(92, 37);
+            label3.Size = new Size(112, 37);
             label3.TabIndex = 5;
             label3.Text = "Sabah";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -117,9 +116,9 @@
             // 
             label4.BackColor = Color.Orange;
             label4.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(278, 73);
+            label4.Location = new Point(287, 73);
             label4.Name = "label4";
-            label4.Size = new Size(100, 37);
+            label4.Size = new Size(120, 37);
             label4.TabIndex = 6;
             label4.Text = "Öğle";
             label4.TextAlign = ContentAlignment.MiddleCenter;
@@ -128,9 +127,9 @@
             // 
             label5.BackColor = Color.Orange;
             label5.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(403, 73);
+            label5.Location = new Point(424, 73);
             label5.Name = "label5";
-            label5.Size = new Size(103, 37);
+            label5.Size = new Size(123, 37);
             label5.TabIndex = 7;
             label5.Text = "Akşam";
             label5.TextAlign = ContentAlignment.MiddleCenter;
@@ -139,83 +138,88 @@
             // 
             label6.BackColor = Color.Orange;
             label6.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(532, 71);
+            label6.Location = new Point(560, 73);
             label6.Name = "label6";
-            label6.Size = new Size(112, 37);
+            label6.Size = new Size(132, 37);
             label6.TabIndex = 8;
             label6.Text = "Ara Öğün";
             label6.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblName
             // 
-            lblName.BackColor = Color.OrangeRed;
+            lblName.BackColor = Color.DarkSeaGreen;
             lblName.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             lblName.Location = new Point(38, 128);
             lblName.Name = "lblName";
-            lblName.Size = new Size(97, 55);
+            lblName.Size = new Size(97, 68);
             lblName.TabIndex = 9;
             lblName.Text = "label7";
             lblName.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
-            label8.BackColor = Color.DarkOrange;
+            label8.BackColor = Color.DarkSlateGray;
             label8.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label8.ForeColor = Color.White;
             label8.Location = new Point(38, 227);
             label8.Name = "label8";
-            label8.Size = new Size(97, 55);
+            label8.Size = new Size(97, 68);
             label8.TabIndex = 10;
             label8.Text = "Diğer Kullanıcılar";
             label8.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblBreakfastUser
             // 
-            lblBreakfastUser.BackColor = Color.LightSalmon;
+            lblBreakfastUser.BackColor = Color.DarkSeaGreen;
             lblBreakfastUser.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             lblBreakfastUser.Location = new Point(155, 128);
             lblBreakfastUser.Name = "lblBreakfastUser";
-            lblBreakfastUser.Size = new Size(103, 55);
+            lblBreakfastUser.Size = new Size(123, 68);
             lblBreakfastUser.TabIndex = 11;
             lblBreakfastUser.Text = " ";
             lblBreakfastUser.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblBreakfastSum
             // 
-            lblBreakfastSum.BackColor = Color.Bisque;
+            lblBreakfastSum.BackColor = Color.DarkSlateGray;
             lblBreakfastSum.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            lblBreakfastSum.ForeColor = Color.White;
             lblBreakfastSum.Location = new Point(155, 227);
             lblBreakfastSum.Name = "lblBreakfastSum";
-            lblBreakfastSum.Size = new Size(109, 55);
+            lblBreakfastSum.Size = new Size(129, 68);
             lblBreakfastSum.TabIndex = 12;
             lblBreakfastSum.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblLunchSum
             // 
-            lblLunchSum.BackColor = Color.Bisque;
+            lblLunchSum.BackColor = Color.DarkSlateGray;
             lblLunchSum.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblLunchSum.Location = new Point(285, 227);
+            lblLunchSum.ForeColor = Color.White;
+            lblLunchSum.Location = new Point(294, 227);
             lblLunchSum.Name = "lblLunchSum";
-            lblLunchSum.Size = new Size(100, 55);
+            lblLunchSum.Size = new Size(120, 68);
             lblLunchSum.TabIndex = 14;
             lblLunchSum.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblDinnerSum
             // 
-            lblDinnerSum.BackColor = Color.Bisque;
+            lblDinnerSum.BackColor = Color.DarkSlateGray;
             lblDinnerSum.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDinnerSum.Location = new Point(401, 227);
+            lblDinnerSum.ForeColor = Color.White;
+            lblDinnerSum.Location = new Point(422, 227);
             lblDinnerSum.Name = "lblDinnerSum";
-            lblDinnerSum.Size = new Size(103, 55);
+            lblDinnerSum.Size = new Size(123, 68);
             lblDinnerSum.TabIndex = 16;
             lblDinnerSum.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblSnackSum
             // 
-            lblSnackSum.BackColor = Color.Bisque;
+            lblSnackSum.BackColor = Color.DarkSlateGray;
             lblSnackSum.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSnackSum.Location = new Point(532, 227);
+            lblSnackSum.ForeColor = Color.White;
+            lblSnackSum.Location = new Point(560, 224);
             lblSnackSum.Name = "lblSnackSum";
-            lblSnackSum.Size = new Size(112, 55);
+            lblSnackSum.Size = new Size(132, 68);
             lblSnackSum.TabIndex = 18;
             lblSnackSum.TextAlign = ContentAlignment.MiddleCenter;
             // 
@@ -246,7 +250,7 @@
             label7.AutoSize = true;
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label7.Location = new Point(650, 160);
+            label7.Location = new Point(719, 155);
             label7.Name = "label7";
             label7.Size = new Size(40, 23);
             label7.TabIndex = 22;
@@ -257,51 +261,50 @@
             label9.AutoSize = true;
             label9.BackColor = Color.Transparent;
             label9.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(650, 261);
+            label9.Location = new Point(719, 256);
             label9.Name = "label9";
             label9.Size = new Size(40, 23);
             label9.TabIndex = 23;
             label9.Text = "kcal";
             // 
-            // dgvTop5
-            // 
-            dgvTop5.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvTop5.Location = new Point(38, 373);
-            dgvTop5.Name = "dgvTop5";
-            dgvTop5.RowHeadersWidth = 51;
-            dgvTop5.RowTemplate.Height = 29;
-            dgvTop5.Size = new Size(686, 168);
-            dgvTop5.TabIndex = 24;
-            // 
             // lblSnackUser
             // 
-            lblSnackUser.BackColor = Color.LightSalmon;
+            lblSnackUser.BackColor = Color.DarkSeaGreen;
             lblSnackUser.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSnackUser.Location = new Point(532, 128);
+            lblSnackUser.Location = new Point(560, 128);
             lblSnackUser.Name = "lblSnackUser";
-            lblSnackUser.Size = new Size(112, 55);
+            lblSnackUser.Size = new Size(132, 68);
             lblSnackUser.TabIndex = 17;
             lblSnackUser.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblDinnerUser
             // 
-            lblDinnerUser.BackColor = Color.LightSalmon;
+            lblDinnerUser.BackColor = Color.DarkSeaGreen;
             lblDinnerUser.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblDinnerUser.Location = new Point(405, 128);
+            lblDinnerUser.Location = new Point(426, 128);
             lblDinnerUser.Name = "lblDinnerUser";
-            lblDinnerUser.Size = new Size(103, 55);
+            lblDinnerUser.Size = new Size(123, 68);
             lblDinnerUser.TabIndex = 15;
             lblDinnerUser.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblLunchUser
             // 
-            lblLunchUser.BackColor = Color.LightSalmon;
+            lblLunchUser.BackColor = Color.DarkSeaGreen;
             lblLunchUser.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
-            lblLunchUser.Location = new Point(280, 128);
+            lblLunchUser.Location = new Point(289, 128);
             lblLunchUser.Name = "lblLunchUser";
-            lblLunchUser.Size = new Size(100, 55);
+            lblLunchUser.Size = new Size(120, 68);
             lblLunchUser.TabIndex = 13;
             lblLunchUser.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // lstTop5
+            // 
+            lstTop5.FormattingEnabled = true;
+            lstTop5.ItemHeight = 20;
+            lstTop5.Location = new Point(42, 369);
+            lstTop5.Name = "lstTop5";
+            lstTop5.Size = new Size(602, 164);
+            lstTop5.TabIndex = 24;
             // 
             // TrendlerForm
             // 
@@ -309,7 +312,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = Properties.Resources.arasayfalar;
             ClientSize = new Size(1022, 553);
-            Controls.Add(dgvTop5);
+            Controls.Add(lstTop5);
             Controls.Add(label9);
             Controls.Add(label7);
             Controls.Add(pictureBox2);
@@ -337,7 +340,6 @@
             Text = "TrendlerForm";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dgvTop5).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -363,9 +365,9 @@
         private PictureBox pictureBox2;
         private Label label7;
         private Label label9;
-        private DataGridView dgvTop5;
         private Label lblSnackUser;
         private Label lblDinnerUser;
         private Label lblLunchUser;
+        private ListBox lstTop5;
     }
 }

@@ -173,6 +173,7 @@
             // 
             label17.AutoSize = true;
             label17.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label17.ForeColor = Color.White;
             label17.Location = new Point(50, 84);
             label17.Name = "label17";
             label17.Size = new Size(40, 23);
@@ -206,6 +207,7 @@
             // 
             lblBreakfastCalorie.AutoSize = true;
             lblBreakfastCalorie.Font = new Font("Segoe UI Semibold", 11.2F, FontStyle.Bold, GraphicsUnit.Point);
+            lblBreakfastCalorie.ForeColor = Color.White;
             lblBreakfastCalorie.Location = new Point(9, 82);
             lblBreakfastCalorie.Name = "lblBreakfastCalorie";
             lblBreakfastCalorie.Size = new Size(23, 25);
@@ -260,7 +262,7 @@
             // 
             // panel2
             // 
-            panel2.BackColor = Color.LightGray;
+            panel2.BackColor = Color.DarkSlateGray;
             panel2.Controls.Add(btnBreakfast);
             panel2.Controls.Add(label17);
             panel2.Controls.Add(label21);
@@ -275,6 +277,7 @@
             // 
             label21.AutoSize = true;
             label21.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label21.ForeColor = Color.White;
             label21.Location = new Point(9, 7);
             label21.Name = "label21";
             label21.Size = new Size(57, 23);
@@ -283,7 +286,7 @@
             // 
             // panel3
             // 
-            panel3.BackColor = Color.LightGray;
+            panel3.BackColor = Color.DarkSlateGray;
             panel3.Controls.Add(btnLunch);
             panel3.Controls.Add(label11);
             panel3.Controls.Add(label12);
@@ -311,6 +314,7 @@
             // 
             label11.AutoSize = true;
             label11.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.White;
             label11.Location = new Point(54, 84);
             label11.Name = "label11";
             label11.Size = new Size(40, 23);
@@ -321,6 +325,7 @@
             // 
             label12.AutoSize = true;
             label12.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.White;
             label12.Location = new Point(9, 7);
             label12.Name = "label12";
             label12.Size = new Size(46, 23);
@@ -343,6 +348,7 @@
             // 
             lblLunchCalorie.AutoSize = true;
             lblLunchCalorie.Font = new Font("Segoe UI Semibold", 11.2F, FontStyle.Bold, GraphicsUnit.Point);
+            lblLunchCalorie.ForeColor = Color.White;
             lblLunchCalorie.Location = new Point(9, 82);
             lblLunchCalorie.Name = "lblLunchCalorie";
             lblLunchCalorie.Size = new Size(23, 25);
@@ -351,7 +357,7 @@
             // 
             // panel4
             // 
-            panel4.BackColor = Color.LightGray;
+            panel4.BackColor = Color.DarkSlateGray;
             panel4.Controls.Add(btnDinner);
             panel4.Controls.Add(label15);
             panel4.Controls.Add(label16);
@@ -379,6 +385,7 @@
             // 
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label15.ForeColor = Color.White;
             label15.Location = new Point(49, 84);
             label15.Name = "label15";
             label15.Size = new Size(40, 23);
@@ -389,6 +396,7 @@
             // 
             label16.AutoSize = true;
             label16.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label16.ForeColor = Color.White;
             label16.Location = new Point(9, 7);
             label16.Name = "label16";
             label16.Size = new Size(61, 23);
@@ -411,6 +419,7 @@
             // 
             lblDinnerCalorie.AutoSize = true;
             lblDinnerCalorie.Font = new Font("Segoe UI Semibold", 11.2F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDinnerCalorie.ForeColor = Color.White;
             lblDinnerCalorie.Location = new Point(9, 82);
             lblDinnerCalorie.Name = "lblDinnerCalorie";
             lblDinnerCalorie.Size = new Size(23, 25);
@@ -419,7 +428,7 @@
             // 
             // panel5
             // 
-            panel5.BackColor = Color.LightGray;
+            panel5.BackColor = Color.DarkSlateGray;
             panel5.Controls.Add(btnSnack);
             panel5.Controls.Add(label20);
             panel5.Controls.Add(label22);
@@ -447,6 +456,7 @@
             // 
             label20.AutoSize = true;
             label20.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label20.ForeColor = Color.White;
             label20.Location = new Point(50, 84);
             label20.Name = "label20";
             label20.Size = new Size(40, 23);
@@ -457,6 +467,7 @@
             // 
             label22.AutoSize = true;
             label22.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.ForeColor = Color.White;
             label22.Location = new Point(9, 7);
             label22.Name = "label22";
             label22.Size = new Size(84, 23);
@@ -479,6 +490,7 @@
             // 
             lblSnackCalorie.AutoSize = true;
             lblSnackCalorie.Font = new Font("Segoe UI Semibold", 11.2F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSnackCalorie.ForeColor = Color.White;
             lblSnackCalorie.Location = new Point(9, 82);
             lblSnackCalorie.Name = "lblSnackCalorie";
             lblSnackCalorie.Size = new Size(23, 25);

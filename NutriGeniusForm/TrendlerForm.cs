@@ -3,6 +3,7 @@ using NutriGenius.Data.Entities;
 using NutriGenius.Data.Entities.Classes;
 using NutriGenius.Data.Entities.SubClasses_Meal;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,130 +19,120 @@ namespace NutriGeniusForm
     public partial class TrendlerForm : Form
     {
         NutriGeniusDbContext db = new NutriGeniusDbContext();
-        User user = SessionManager.CurrentUser;
-        User? dbUser;
+        User? user = SessionManager.CurrentUser;
+
         public TrendlerForm()
         {
             InitializeComponent();
             LoadData();
-            UserFoods(-7);
-            AllUserFoods(-7);
-
+            UserFoods(0);
+            AllUserFoods(0);
+            Top5Food();
             lblName.Text = user.FirstName;
+        }
+
+        private void Top5Food()
+        {
+            var mostFavFoods = db.UserFoodPortionMeals
+                        .Include(x => x.Food)
+                        .GroupBy(uf => uf.FoodId)
+                        .OrderByDescending(g => g.Count())
+                        .Take(5)
+                        .Select(g => new { Ad = g.First().Food.FoodName, Adet = g.Count() });
+
+            foreach (var food in mostFavFoods)
+            {
+                lstTop5.Items.Add(food);
+            }
+
         }
 
         private void LoadData()
         {
-            dbUser = db.Users
-              .Include(u => u.UserFoodPortionMeals)
-              .ThenInclude(uf => uf.Meal)
-              .Include(u => u.UserFoodPortionMeals)
-              .ThenInclude(uf => uf.Food)
-              .Include(u => u.UserFoodPortionMeals)
-              .ThenInclude(uf => uf.Portion)
-              .FirstOrDefault(u => u.Id == user.Id);
+            user = db.Users
+                 .Include(u => u.UserFoodPortionMeals)
+                 .ThenInclude(uf => uf.Meal)
+                 .Include(u => u.UserFoodPortionMeals)
+                 .ThenInclude(uf => uf.Food)
+                 .FirstOrDefault(u => u.Id == user.Id)!;
         }
 
-        private void AllUserFoods(int day)
+        private void AllUserFoods(int reportType)
         {
-            List<UserFoodPortionMeal> breakfasts = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            List<UserFoodPortionMeal> lunches = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            List<UserFoodPortionMeal> dinners = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            List<UserFoodPortionMeal> snacks = db.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün").Where(x => x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            int maxBreakfastFoodId = FindFoodId(breakfasts);
-            int maxLunchFoodId = FindFoodId(lunches);
-            int maxDinnerFoodId = FindFoodId(dinners);
-            int maxSnackFoodId = FindFoodId(snacks);
-
-            lblBreakfastSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxBreakfastFoodId).First().Food.FoodName;
-
-            lblLunchSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxLunchFoodId).First().Food.FoodName;
-
-            lblDinnerSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxDinnerFoodId).First().Food.FoodName;
-
-            lblSnackSum.Text = db.UserFoodPortionMeals.Where(x => x.FoodId == maxSnackFoodId).First().Food.FoodName;
+            lblBreakfastSum.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Kahvaltı", 1, reportType)));
+            lblLunchSum.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Öğle Yemeği", 1, reportType)));
+            lblDinnerSum.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Akşam Yemeği", 1, reportType)));
+            lblSnackSum.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Ara Öğün", 1, reportType)));
 
         }
-        private void UserFoods(int day)
+
+        private void UserFoods(int reportType)
         {
-            List<UserFoodPortionMeal> ufListBr = dbUser!.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı"
-           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            List<UserFoodPortionMeal> ufListLn = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği"
-           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            List<UserFoodPortionMeal> ufListDn = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği"
-           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            List<UserFoodPortionMeal> ufListSn = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün"
-           && x.Meal.MealDate.Day > DateTime.Now.AddDays(day).Day && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList();
-
-            int maxBreakfastFoodId = FindFoodId(ufListBr);
-            int maxLunchFoodId = FindFoodId(ufListLn);
-            int maxDinnerFoodId = FindFoodId(ufListDn);
-            int maxSnackFoodId = FindFoodId(ufListSn);
-
-            lblBreakfastUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxBreakfastFoodId).First().Food.FoodName;
-
-            lblLunchUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxLunchFoodId).First().Food.FoodName;
-
-            lblDinnerUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxDinnerFoodId).First().Food.FoodName;
-
-            lblSnackUser.Text = dbUser.UserFoodPortionMeals.Where(x => x.FoodId == maxSnackFoodId).First().Food.FoodName;
-
+            lblBreakfastUser.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Kahvaltı", 0, reportType)));
+            lblLunchUser.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Öğle Yemeği", 0, reportType)));
+            lblDinnerUser.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Akşam Yemeği", 0, reportType)));
+            lblSnackUser.Text = FindFoodName(FindFoodId(FindUserMealFoodPortion("Ara Öğün", 0, reportType)));
         }
 
+        private string FindFoodName(int foodId)
+        {
+            if (foodId == 0)
+                return "Bu hafta öğünlerin boş :)";
+            return db.Foods.Where(x => x.Id == foodId).FirstOrDefault()!.FoodName;
+        }
+
+        private List<UserFoodPortionMeal> FindUserMealFoodPortion(string mealName, int option, int reportType)
+        {
+            int dayNo = reportType == 0 ? -(int)DateTime.Now.DayOfWeek : -DateTime.Now.Day;
+
+            if (option == 0)
+            {
+                return user.UserFoodPortionMeals.Where(x => x.Meal!.MealName == mealName).Where(x => x.Meal!.MealDate > DateTime.Now.AddDays(dayNo) && x.Meal.MealDate <= DateTime.Now).ToList();
+            }
+            else
+            {
+                var ufs = new List<UserFoodPortionMeal>();
+
+                foreach (User user in db.Users.Include(u => u.UserFoodPortionMeals).ThenInclude(uf => uf.Meal))
+                {
+                    ufs.AddRange(user.UserFoodPortionMeals.Where(x => x.Meal!.MealName == mealName).Where(x => x.Meal!.MealDate > DateTime.Now.AddDays(dayNo) && x.Meal.MealDate.Day <= DateTime.Now.Day).ToList());
+                }
+                return ufs;
+            }
+        }
         private static int FindFoodId(List<UserFoodPortionMeal> ufList)
         {
             int maxCount = 0;
             int count = 0;
             int maxFoodId = 0;
 
-            for (int i = 0; i < ufList.Count - 1; i++)
+            var foodList = ufList.Select(uf => uf.FoodId).ToList();
+
+            foreach (int foodId in foodList.Distinct())
             {
-                count = 0;
+                count = foodList.Count(f => f == foodId);
 
-                for (int j = i + 1; j < ufList.Count; j++)
-                {
-                    if (ufList[i].FoodId == ufList[j].FoodId)
-                    {
-                        count++;
-                    }
 
-                }
                 if (count > maxCount)
                 {
                     maxCount = count;
-                    maxFoodId = ufList[i].FoodId;
+                    maxFoodId = foodId;
                 }
 
             }
-
-            if (maxFoodId == 0)
-            {
-                maxFoodId = ufList[0].FoodId;
-            }
-
             return maxFoodId;
         }
 
-
-
         private void mtnMonthly_Click(object sender, EventArgs e)
         {
-            UserFoods(-30);
-            AllUserFoods(-30);
-
+            UserFoods(1);
+            AllUserFoods(1);
         }
 
         private void btnWeekly_Click(object sender, EventArgs e)
         {
-            UserFoods(-7);
-            AllUserFoods(-7);
+            UserFoods(0);
+            AllUserFoods(0);
         }
     }
 }

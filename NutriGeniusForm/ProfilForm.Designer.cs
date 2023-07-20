@@ -156,7 +156,7 @@
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.Black;
-            label2.Location = new Point(364, 299);
+            label2.Location = new Point(351, 301);
             label2.Name = "label2";
             label2.Size = new Size(120, 30);
             label2.TabIndex = 18;
@@ -166,7 +166,7 @@
             // txtBirthDate
             // 
             txtBirthDate.Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            txtBirthDate.Location = new Point(395, 304);
+            txtBirthDate.Location = new Point(477, 304);
             txtBirthDate.Name = "txtBirthDate";
             txtBirthDate.Size = new Size(137, 27);
             txtBirthDate.TabIndex = 27;

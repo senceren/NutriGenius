@@ -42,7 +42,7 @@ namespace NutriGenius.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Meal");
+                    b.ToTable("Meal", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Meal");
                 });
@@ -69,7 +69,7 @@ namespace NutriGenius.Data.Migrations
 
                     b.HasIndex("FoodCategoryId");
 
-                    b.ToTable("Foods");
+                    b.ToTable("Foods", (string)null);
                 });
 
             modelBuilder.Entity("NutriGenius.Data.Entities.Classes.FoodCategory", b =>
@@ -86,7 +86,7 @@ namespace NutriGenius.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FoodCategories");
+                    b.ToTable("FoodCategories", (string)null);
 
                     b.HasData(
                         new
@@ -180,7 +180,7 @@ namespace NutriGenius.Data.Migrations
 
                     b.HasIndex("FoodId");
 
-                    b.ToTable("Portions");
+                    b.ToTable("Portions", (string)null);
                 });
 
             modelBuilder.Entity("NutriGenius.Data.Entities.Classes.User", b =>
@@ -224,7 +224,7 @@ namespace NutriGenius.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("NutriGenius.Data.Entities.Classes.UserFoodPortionMeal", b =>
@@ -249,7 +249,7 @@ namespace NutriGenius.Data.Migrations
 
                     b.HasIndex("PortionId");
 
-                    b.ToTable("UserFoodPortionMeals");
+                    b.ToTable("UserFoodPortionMeals", (string)null);
                 });
 
             modelBuilder.Entity("NutriGenius.Data.Entities.SubClasses_Meal.Breakfast", b =>

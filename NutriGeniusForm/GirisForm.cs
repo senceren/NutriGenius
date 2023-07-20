@@ -33,7 +33,7 @@ namespace NutriGeniusForm
             }
 
             User? logInUser = new User();
-
+            
             if (logInUser.LogIn(db, txtUserName.Text, txtPassword.Text))
 
             {

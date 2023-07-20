@@ -31,7 +31,6 @@
             btnSignIn = new Button();
             btnLogIn = new Button();
             label1 = new Label();
-            button1 = new Button();
             SuspendLayout();
             // 
             // btnSignIn
@@ -68,16 +67,6 @@
             label1.TabIndex = 2;
             label1.Text = "Zaten bir hesabım var.";
             // 
-            // button1
-            // 
-            button1.Location = new Point(707, 476);
-            button1.Name = "button1";
-            button1.Size = new Size(94, 29);
-            button1.TabIndex = 3;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
-            // 
             // AcilisForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -85,7 +74,6 @@
             BackgroundImage = Properties.Resources.acilis1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(842, 553);
-            Controls.Add(button1);
             Controls.Add(label1);
             Controls.Add(btnLogIn);
             Controls.Add(btnSignIn);
@@ -102,6 +90,5 @@
         private Button btnSignIn;
         private Button btnLogIn;
         private Label label1;
-        private Button button1;
     }
 }
