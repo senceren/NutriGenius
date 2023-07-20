@@ -296,7 +296,7 @@
             lblTotalMealCalorie.BackColor = Color.Transparent;
             lblTotalMealCalorie.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblTotalMealCalorie.ForeColor = Color.DarkGreen;
-            lblTotalMealCalorie.Location = new Point(520, 100);
+            lblTotalMealCalorie.Location = new Point(508, 113);
             lblTotalMealCalorie.Name = "lblTotalMealCalorie";
             lblTotalMealCalorie.Size = new Size(24, 28);
             lblTotalMealCalorie.TabIndex = 55;
@@ -308,7 +308,7 @@
             label5.BackColor = Color.Transparent;
             label5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label5.ForeColor = Color.Black;
-            label5.Location = new Point(563, 100);
+            label5.Location = new Point(570, 113);
             label5.Name = "label5";
             label5.Size = new Size(39, 28);
             label5.TabIndex = 56;
@@ -320,7 +320,7 @@
             label7.BackColor = Color.Transparent;
             label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label7.ForeColor = Color.Black;
-            label7.Location = new Point(338, 100);
+            label7.Location = new Point(354, 113);
             label7.Name = "label7";
             label7.Size = new Size(148, 28);
             label7.TabIndex = 57;
