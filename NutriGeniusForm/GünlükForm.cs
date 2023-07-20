@@ -26,15 +26,22 @@ namespace NutriGeniusForm
             Connect();
             InitializeComponent();
             ListOfMeals();
-            ListCalories();
+
         }
 
-        private void ListCalories()
+        private void ListCalories(List<UserFoodPortionMeal> userMeals)
         {
-            lblBreakfastCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal?.Calorie.ToString();
-            lblLunchCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal.Calorie.ToString();
-            lblDinnerCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal.Calorie.ToString();
-            lblSnackCalorie.Text = dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün" && x.Meal.MealDate == dtpDate.Value.Date).FirstOrDefault()?.Meal.Calorie.ToString();
+            if (userMeals.Count == 0)
+            {
+                lblBreakfastCalorie.Text = lblLunchCalorie.Text = lblDinnerCalorie.Text = lblSnackCalorie.Text = lblTotalMealCalorie.Text = userMeals.Count.ToString();
+                return;
+            }
+
+            lblBreakfastCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Kahvaltı")?.Meal?.Calorie.ToString();
+            lblLunchCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Öğle Yemeği")?.Meal?.Calorie.ToString();
+            lblDinnerCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Akşam Yemeği")?.Meal?.Calorie.ToString();
+            lblSnackCalorie.Text = userMeals.FirstOrDefault(um => um.Meal?.MealName == "Ara Öğün")?.Meal?.Calorie.ToString();
+            lblTotalMealCalorie.Text = userMeals.Sum(uf => uf.Portion!.Calorie * uf.Portion.Amount).ToString();
         }
 
         private void ListOfMeals()
@@ -45,27 +52,29 @@ namespace NutriGeniusForm
             lstDinner.Items.Clear();
             lstSnack.Items.Clear();
 
-            foreach (var item in dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Kahvaltı" && x.Meal.MealDate == dtpDate.Value.Date))
+            var userMeal = dbUser.UserFoodPortionMeals.Where(uf => uf.Meal?.MealDate == dtpDate.Value.Date).ToList();
+
+            foreach (var item in userMeal.Where(x => x.Meal.MealName == "Kahvaltı"))
             {
                 lstBreakfast.Items.Add(item.Food.FoodName);
             }
 
-            foreach (var item in dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Ara Öğün" && x.Meal.MealDate == dtpDate.Value.Date))
+            foreach (var item in userMeal.Where(x => x.Meal.MealName == "Ara Öğün"))
             {
                 lstSnack.Items.Add(item.Food.FoodName);
             }
 
-            foreach (var item in dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Öğle Yemeği" && x.Meal.MealDate == dtpDate.Value.Date))
+            foreach (var item in userMeal.Where(x => x.Meal.MealName == "Öğle Yemeği"))
             {
                 lstLunch.Items.Add(item.Food.FoodName);
             }
 
-            foreach (var item in dbUser.UserFoodPortionMeals.Where(x => x.Meal.MealName == "Akşam Yemeği" && x.Meal.MealDate == dtpDate.Value.Date))
+            foreach (var item in userMeal.Where(x => x.Meal.MealName == "Akşam Yemeği"))
             {
                 lstDinner.Items.Add(item.Food.FoodName);
             }
 
-
+            ListCalories(userMeal);
 
         }
 
